@@ -1,0 +1,4342 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Eduvel.AI — Tecnología Andina a 3600m. IA, Automatización y Desarrollo Web desde Bolivia.">
+<meta name="keywords" content="Eduvel AI, inteligencia artificial, automatización, desarrollo web, Bolivia, La Paz">
+<meta property="og:title" content="Eduvel.AI — Tecnología Andina a 3600m">
+<meta property="og:description" content="Llevando la Inteligencia Artificial al siguiente nivel desde Bolivia">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00D4FF">
+<title>Eduvel.AI — Tecnología Andina a 3600m</title>
+<script>(function(){var t=localStorage.getItem('eduvel-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+<!-- Preconnect for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ===== FUENTES GOOGLE ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================================================
+   VARIABLES GLOBALES DE COLOR Y TIPOGRAFÍA
+   Usadas en todo el sitio para mantener coherencia visual
+   ================================================ */
+:root,
+[data-theme="dark"] {
+  --bg: #0a0e1a;
+  --electric: #00D4FF;
+  --gold: #D4AF37;
+  --white: #ffffff;
+  --soft-blue: #B8D8EB;
+  --dark-card: #0f1628;
+  --darker: #050810;
+  --card-bg: rgba(15,22,40,.9);
+  --card-border: rgba(0,212,255,.12);
+  --text-primary: #ffffff;
+  --text-secondary: #B8D8EB;
+  --text-muted: rgba(184,216,235,.55);
+  --nav-bg-scrolled: rgba(10,14,26,.9);
+  --input-bg: rgba(10,14,26,.8);
+  --input-border: rgba(255,255,255,.08);
+  --footer-bg: #050810;
+  --section-bg-1: #0a0e1a;
+  --section-bg-2: #0c1220;
+  --hero-bg: radial-gradient(ellipse at 50% 40%, #0d2040 0%, #0a1628 40%, #0a0e1a 100%);
+  --particle-color: rgba(0,212,255,1);
+  --particle-opacity: .45;
+  --shadow-card: 0 20px 60px rgba(0,212,255,.08);
+  --shadow-glow: 0 0 30px rgba(0,212,255,.2);
+  --glassmorphism: rgba(15,22,40,.65);
+  --glassmorphism-border: rgba(0,212,255,.15);
+  --moon-display: flex;
+  --sun-display: none;
+}
+
+[data-theme="light"] {
+  --bg: #eef2fa;
+  --electric: #0088bb;
+  --gold: #a07820;
+  --white: #101828;
+  --soft-blue: #1e3a5a;
+  --dark-card: #ffffff;
+  --darker: #dde6f5;
+  --card-bg: rgba(255,255,255,.95);
+  --card-border: rgba(0,136,187,.18);
+  --text-primary: #101828;
+  --text-secondary: #1e3a5a;
+  --text-muted: rgba(30,58,90,.6);
+  --nav-bg-scrolled: rgba(238,242,250,.95);
+  --input-bg: rgba(255,255,255,.95);
+  --input-border: rgba(0,136,187,.2);
+  --footer-bg: #dde6f5;
+  --section-bg-1: #eef2fa;
+  --section-bg-2: #e8eef8;
+  --hero-bg: radial-gradient(ellipse at 50% 40%, #cce0f5 0%, #d8eaf8 40%, #eef2fa 100%);
+  --particle-color: rgba(0,136,187,1);
+  --particle-opacity: .2;
+  --shadow-card: 0 8px 32px rgba(0,136,187,.1);
+  --shadow-glow: 0 0 20px rgba(0,136,187,.15);
+  --glassmorphism: rgba(255,255,255,.75);
+  --glassmorphism-border: rgba(0,136,187,.2);
+  --moon-display: none;
+  --sun-display: flex;
+}
+
+/* Global smooth theme transition */
+html { transition: background-color .4s ease; }
+body { transition: background .4s ease, color .4s ease; }
+
+/* ================================================
+   RESET Y BASE GLOBAL
+   ================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  /* cursor:none; ← ELIMINADO para restaurar el cursor normal del navegador */
+}
+
+/* ================================================
+   CURSOR PERSONALIZADO — DESACTIVADO
+   Se eliminó el cursor personalizado (punto azul + anillo)
+   que seguía al mouse. El cursor nativo del navegador
+   se muestra ahora normalmente.
+   ================================================ */
+/* .cursor y .cursor-ring ya no se usan */
+
+/* ================================================
+   CANVAS DE PARTÍCULAS — FONDO ANIMADO
+   El canvas ocupa toda la pantalla fija detrás del contenido.
+   Las partículas y líneas de conexión se dibujan aquí con JS.
+   ================================================ */
+#particleCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .45;
+  transition: opacity .4s ease;
+}
+
+/* Botones de redes sociales reales */
+.social-btn-yt { background: rgba(255,0,0,.12); border: 1px solid rgba(255,0,0,.4); color: #ff4444; }
+.social-btn-yt:hover { background: rgba(255,0,0,.25); box-shadow: 0 0 16px rgba(255,0,0,.4); }
+.social-btn-tt { background: rgba(0,242,234,.08); border: 1px solid rgba(0,242,234,.3); color: #00f2ea; }
+.social-btn-tt:hover { background: rgba(0,242,234,.2); box-shadow: 0 0 16px rgba(0,242,234,.4); }
+.social-btn-wa { background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.35); color: #25d366; }
+.social-btn-wa:hover { background: rgba(37,211,102,.22); box-shadow: 0 0 16px rgba(37,211,102,.4); }
+
+/* ================================================
+   CAPA DE CIRCUITOS NEÓN AZUL (rollos/cables animados)
+   SVGs pequeños generados dinámicamente con JS que aparecen
+   y desaparecen por toda la pantalla con animación CSS.
+   ================================================ */
+#neonCircuits {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: .7;
+  transition: opacity .4s;
+}
+[data-theme="light"] #neonCircuits { opacity: .15; }
+
+/* Cada "rollo" de circuito es un div absoluto con SVG interno */
+.nc-roll {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: rollAppear 6s ease-in-out infinite;
+}
+.nc-roll svg { display: block; }
+
+/* Animación de aparición/desaparición con escala y rotación */
+@keyframes rollAppear {
+  0%   { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  15%  { opacity: 0.7; transform: scale(1) rotate(20deg); }
+  75%  { opacity: 0.5; transform: scale(1.05) rotate(-10deg); }
+  100% { opacity: 0; transform: scale(0.7) rotate(30deg); }
+}
+
+/* ================================================
+   NAVBAR — BARRA DE NAVEGACIÓN FIJA
+   Se vuelve semi-transparente con blur al hacer scroll.
+   Contiene logo + links SPA que abren "páginas" en overlay.
+   ================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 16px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all .4s;
+}
+
+/* Estado scrolled: fondo oscuro semi-transparente con borde neón */
+nav.scrolled {
+  background: rgba(10,14,26,.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,212,255,.25);
+  box-shadow: 0 0 30px rgba(0,212,255,.08);
+}
+
+/* Logo en la navbar: ícono + texto */
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { width: 42px; height: 42px; object-fit: contain; }
+.nav-logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+/* Links de navegación con efecto de subrayado neón al hover */
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color .3s;
+  cursor: pointer;  /* Permite clic aunque sea <a> sin href real */
+}
+
+/* Subrayado neón que se expande al hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--electric);
+  transition: width .3s;
+  box-shadow: 0 0 8px var(--electric);
+}
+.nav-links a:hover { color: var(--electric); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Link activo (sección SPA actualmente visible) */
+.nav-links a.active {
+  color: var(--electric);
+}
+.nav-links a.active::after { width: 100%; }
+
+/* ================================================
+   SISTEMA SPA — OVERLAY DE SECCIONES INDEPENDIENTES
+   Cada sección (Inicio, Servicios, Blog, Contenido,
+   Contacto) es un <div> con clase .spa-page que ocupa
+   toda la pantalla. Se activa con JS mediante clases CSS.
+   ================================================ */
+
+/* Overlay SPA: cubre toda la pantalla, oculto por defecto */
+.spa-page {
+  position: fixed;
+  inset: 0;                         /* top/right/bottom/left = 0 */
+  z-index: 850;                     /* Por encima del contenido principal */
+  background: var(--overlay-bg, var(--bg));
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;             /* Invisible e ininteractuable */
+  transform: translateY(30px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+/* Estado activo: visible e interactuable */
+.spa-page.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* Cabecera de cada sección SPA */
+.spa-header {
+  padding: 100px 80px 60px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,212,255,.1);
+  position: relative;
+}
+.spa-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+.spa-header h1 .gold { color: var(--gold); }
+.spa-header p {
+  color: var(--soft-blue);
+  font-size: 17px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Botón de cierre de la sección SPA (X en esquina superior derecha) */
+.spa-close {
+  position: absolute;
+  top: 24px; right: 32px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(0,212,255,.08);
+  border: 1px solid rgba(0,212,255,.3);
+  color: var(--electric);
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .3s;
+}
+.spa-close:hover {
+  background: rgba(0,212,255,.2);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 16px rgba(0,212,255,.4);
+}
+
+/* Contenido interno de las secciones SPA */
+.spa-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 80px 100px;
+}
+
+/* Franja decorativa boliviana (rojo/amarillo/verde) en el tope de cada SPA */
+.spa-stripe {
+  height: 3px;
+  display: flex;
+}
+.spa-stripe .s-red   { flex: 1; background: #D32F2F; }
+.spa-stripe .s-yellow{ flex: 1; background: #FFC107; }
+.spa-stripe .s-green { flex: 1; background: #4CAF50; }
+
+/* ── GRID DE SERVICIOS dentro del SPA de servicios ── */
+.spa-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* ── GRID DE BLOG dentro del SPA de blog ── */
+.spa-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ── GRID DE VIDEOS dentro del SPA de contenido ── */
+.spa-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── GRID DE CONTACTO dentro del SPA ── */
+.spa-contact-grid {
+  display: grid;
+  grid-template-columns: 40% 56%;
+  gap: 60px;
+}
+
+/* ── INICIO: tarjetas de features en el SPA de inicio ── */
+.spa-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 50px;
+}
+.spa-feature-card {
+  background: rgba(15,22,40,.8);
+  border: 1px solid rgba(0,212,255,.12);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: all .35s;
+}
+.spa-feature-card:hover {
+  border-color: rgba(0,212,255,.3);
+  box-shadow: 0 0 40px rgba(0,212,255,.1);
+  transform: translateY(-5px);
+}
+.spa-feature-icon { font-size: 36px; margin-bottom: 16px; }
+.spa-feature-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+.spa-feature-desc {
+  font-size: 14px;
+  color: rgba(184,216,235,.7);
+  line-height: 1.65;
+}
+
+/* ── Tarjeta de servicio en el SPA ── */
+.spa-service-card {
+  background: var(--blog-card-bg, linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.9)));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  padding: 36px;
+  transition: all .35s;
+  position: relative;
+  overflow: hidden;
+}
+.spa-service-card:hover {
+  border-color: rgba(0,212,255,.25);
+  box-shadow: 0 0 50px rgba(0,212,255,.08);
+  transform: translateY(-5px);
+}
+.spa-svc-num {
+  position: absolute; top: 20px; right: 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 48px; font-weight: 700;
+  color: rgba(212,175,55,.06);
+  user-select: none;
+}
+.spa-svc-icon {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 18px;
+}
+.spa-svc-icon.blue { background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.3); }
+.spa-svc-icon.gold { background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.3); }
+.spa-svc-icon.green{ background: rgba(76,175,80,.1);  border: 1px solid rgba(76,175,80,.3);  }
+.spa-svc-icon.red  { background: rgba(211,47,47,.1);  border: 1px solid rgba(211,47,47,.3);  }
+.spa-svc-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.spa-svc-desc  { font-size: 14px; color: rgba(184,216,235,.7); line-height: 1.65; }
+
+/* ── Tarjeta de blog en el SPA ── */
+.spa-blog-card {
+  background: var(--blog-card-bg, linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.95)));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all .35s;
+}
+.spa-blog-card:hover {
+  border-color: rgba(0,212,255,.25);
+  box-shadow: 0 0 40px rgba(0,212,255,.1);
+  transform: translateY(-6px);
+}
+.spa-blog-card img {
+  width: 100%; height: 170px;
+  object-fit: cover; display: block;
+  filter: brightness(.85) saturate(1.1);
+  transition: transform .4s, filter .4s;
+}
+.spa-blog-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1.3);
+}
+.spa-blog-body { padding: 22px 22px 26px; }
+.spa-blog-tag {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 10px;
+  font-weight: 700; letter-spacing: 2px; margin-bottom: 10px;
+}
+.spa-blog-tag.blue { background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.3); color: var(--electric); }
+.spa-blog-tag.gold { background: rgba(212,175,55,.1);  border: 1px solid rgba(212,175,55,.3); color: var(--gold); }
+.spa-blog-tag.green{ background: rgba(76,175,80,.1);   border: 1px solid rgba(76,175,80,.3);  color: #4CAF50; }
+.spa-blog-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--text-primary, var(--white)); margin-bottom: 10px; line-height: 1.4;
+}
+.spa-blog-excerpt {
+  font-size: 13px; color: rgba(184,216,235,.65);
+  line-height: 1.65; margin-bottom: 14px;
+}
+.spa-blog-meta {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  font-size: 11px; letter-spacing: 1px;
+  color: rgba(184,216,235,.4);
+}
+
+/* ── Tarjeta de video en el SPA ── */
+.spa-video-card {
+  background: var(--blog-card-bg, linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.95)));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all .35s;
+}
+.spa-video-card:hover {
+  border-color: rgba(0,212,255,.3);
+  box-shadow: 0 0 35px rgba(0,212,255,.12);
+  transform: translateY(-5px);
+}
+.spa-video-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+.spa-video-thumb iframe { width: 100%; height: 100%; display: block; border: none; }
+.spa-video-body { padding: 16px 18px 20px; }
+.spa-video-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--white); margin-bottom: 6px; line-height: 1.4;
+}
+.spa-video-desc { font-size: 12px; color: rgba(184,216,235,.6); line-height: 1.6; }
+.spa-video-meta {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-top: 10px;
+  font-size: 11px; letter-spacing: 1px; color: rgba(184,216,235,.4);
+}
+
+/* Video principal destacado en el SPA de contenido */
+.spa-video-featured {
+  max-width: 860px;
+  margin: 0 auto 50px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,212,255,.3);
+  box-shadow: 0 0 60px rgba(0,212,255,.15);
+  background: #000;
+  position: relative;
+}
+.spa-video-featured iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.spa-video-featured-label {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(10,14,26,.9);
+  border: 1px solid rgba(0,212,255,.35);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  color: var(--electric); backdrop-filter: blur(10px); pointer-events: none;
+}
+
+/* Formulario de contacto dentro del SPA */
+.spa-form-card {
+  background: rgba(15,22,40,.65);
+  border: 1px solid rgba(0,212,255,.12);
+  border-radius: 20px; padding: 40px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 60px rgba(0,212,255,.04);
+}
+.spa-contact-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.spa-contact-card {
+  background: rgba(15,22,40,.6);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px; padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: all .3s; backdrop-filter: blur(10px);
+}
+.spa-contact-card:hover {
+  border-color: rgba(0,212,255,.25);
+  transform: translateX(5px);
+  box-shadow: 0 0 20px rgba(0,212,255,.06);
+}
+.spa-cc-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.spa-cc-icon.blue  { background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.25); }
+.spa-cc-icon.gold  { background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.25); }
+.spa-cc-icon.green { background: rgba(76,175,80,.1);  border: 1px solid rgba(76,175,80,.25);  }
+.spa-cc-label { font-size: 11px; letter-spacing: 1.5px; color: var(--soft-blue); margin-bottom: 3px; }
+.spa-cc-value { font-size: 14px; font-weight: 600; }
+
+/* ================================================
+   SECCIÓN HERO — PANTALLA PRINCIPAL
+   Ocupa el 100vh de altura. Contiene logo animado,
+   título, subtítulo y botones CTA.
+   ================================================ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+  background: var(--hero-bg, radial-gradient(ellipse at 50% 40%, #0d2040 0%, #0a1628 40%, #0a0e1a 100%));
+}
+
+/* Silueta decorativa de montañas andinas (SVG, esquina inferior izquierda) */
+.mountains {
+  position: absolute;
+  bottom: 0; left: -5%;
+  width: 55%; opacity: .12;
+  pointer-events: none;
+}
+
+/* Teleférico animado (icónico de La Paz) en la esquina superior derecha */
+.cablecar {
+  position: absolute;
+  top: 10%; right: 6%;
+  animation: cableMove 12s ease-in-out infinite alternate;
+}
+@keyframes cableMove {
+  from { transform: translateX(0) translateY(0); }
+  to   { transform: translateX(-60px) translateY(10px); }
+}
+.cablecar-line {
+  width: 160px; height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,.3), transparent);
+}
+.cablecar-body {
+  width: 28px; height: 18px;
+  background: rgba(0,212,255,.7);
+  border-radius: 4px;
+  margin-left: 66px; margin-top: -10px;
+  box-shadow: 0 0 10px var(--electric);
+}
+
+/* ================================================
+   LOGO HERO — Contenedor con anillos giratorios
+   El logo flota verticalmente con animación CSS.
+   AJUSTADO: margen superior aumentado para bajarlo en pantalla.
+   ================================================ */
+.hero-logo-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  /* ─── margin-top aumentado para bajar el logo más en la pantalla ─── */
+  margin-top: 90px;
+  margin-bottom: 20px;
+  animation: heroFloat 4s ease-in-out infinite;
+  perspective: 800px;
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Anillo exterior que gira lentamente */
+.logo-ring {
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,255,.25);
+  animation: spin 9s linear infinite;
+}
+/* Segundo anillo punteado dorado que gira en sentido contrario */
+.logo-ring.r2 {
+  inset: -38px;
+  border: 1px dashed rgba(212,175,55,.18);
+  animation: spin 16s linear infinite reverse;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Halo de brillo que pulsa alrededor del logo */
+.logo-glow {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,.1) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
+
+/* Imagen principal del logo hero */
+.hero-logo-img {
+  width: 220px; height: 220px;
+  object-fit: contain;
+  position: relative; z-index: 2;
+  filter:
+    drop-shadow(0 0 25px rgba(0,212,255,.5))
+    drop-shadow(0 0 50px rgba(212,175,55,.25))
+    drop-shadow(0 0 3px rgba(212,175,55,.4));
+}
+
+/* Línea de escaneo que recorre el logo de arriba a abajo */
+.scanline {
+  position: absolute;
+  width: 100%; height: 2px;
+  background: rgba(0,212,255,.5);
+  top: 0; z-index: 10; pointer-events: none;
+  animation: scanDown 3s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--electric);
+  border-radius: 1px;
+}
+@keyframes scanDown {
+  0%   { top: 0; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Chispas decorativas que aparecen en los bordes del logo */
+.spark {
+  position: absolute;
+  width: 5px; height: 5px;
+  background: var(--electric);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkAnim 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--electric);
+}
+@keyframes sparkAnim {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50%       { opacity: 1; transform: scale(1.5); }
+}
+
+/* Título principal del hero */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 5.5vw, 68px);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 16px;
+  position: relative; z-index: 1;
+}
+.hero-title .line1 { color: var(--white); display: block; }
+/* Segunda línea del título: degradado dorado */
+.hero-title .line2 {
+  display: block;
+  background: linear-gradient(135deg, #D4AF37, #F5D97A, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtítulo del hero */
+.hero-sub {
+  color: var(--soft-blue);
+  font-size: 17px; letter-spacing: 1px;
+  margin-bottom: 14px; z-index: 1; position: relative;
+}
+
+/* Tres puntitos con los colores de la bandera boliviana */
+.bolivian-dots {
+  display: flex; gap: 8px;
+  justify-content: center; margin-bottom: 36px;
+}
+.bolivian-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.bolivian-dots span:nth-child(1) { background: #D32F2F; animation-delay: 0s; }
+.bolivian-dots span:nth-child(2) { background: #FFC107; animation-delay: .3s; }
+.bolivian-dots span:nth-child(3) { background: #4CAF50; animation-delay: .6s; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: .8; }
+  50%       { transform: scale(1.4); opacity: 1; }
+}
+
+/* Botones CTA del hero */
+.hero-btns { display: flex; gap: 16px; justify-content: center; z-index: 1; position: relative; }
+.btn-primary {
+  padding: 14px 38px;
+  background: var(--electric); color: #0a0e1a;
+  border: none; border-radius: 40px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 2px;
+  cursor: pointer; transition: all .3s;
+  box-shadow: 0 0 20px rgba(0,212,255,.4);
+}
+.btn-primary:hover { transform: scale(1.06); box-shadow: 0 0 40px rgba(0,212,255,.7); }
+.btn-outline {
+  padding: 14px 38px;
+  background: transparent; color: var(--gold);
+  border: 1.5px solid var(--gold);
+  border-radius: 40px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 2px;
+  cursor: pointer; transition: all .3s;
+}
+.btn-outline:hover {
+  transform: scale(1.06);
+  background: rgba(212,175,55,.08);
+  box-shadow: 0 0 20px rgba(212,175,55,.3);
+}
+
+/* Indicador de scroll (flecha que rebota hacia abajo) */
+.scroll-indicator {
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%); z-index: 1;
+}
+.scroll-circle {
+  width: 30px; height: 50px;
+  border: 1.5px solid rgba(0,212,255,.35);
+  border-radius: 15px;
+  display: flex; justify-content: center; padding-top: 8px;
+}
+.scroll-dot {
+  width: 6px; height: 6px;
+  background: var(--electric); border-radius: 50%;
+  animation: scrollB 2s ease-in-out infinite;
+}
+@keyframes scrollB {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(16px); opacity: .3; }
+}
+
+/* Líneas de circuito horizontales animadas que cruzan el hero */
+.circuit-lines {
+  position: absolute; inset: 0;
+  pointer-events: none; overflow: hidden; z-index: 0;
+}
+.circuit-line {
+  position: absolute; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,.12), transparent);
+  animation: circuitMove 8s linear infinite;
+}
+@keyframes circuitMove {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(200%); }
+}
+
+/* ================================================
+   SECCIONES DE CONTENIDO — ESTILOS GENERALES
+   ================================================ */
+section { position: relative; z-index: 2; }
+
+/* Etiqueta de sección (ej: "⚡ SERVICIOS") */
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 20px;
+  border: 1px solid rgba(212,175,55,.3);
+  background: rgba(212,175,55,.05);
+  color: var(--gold);
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.section-label.red   { border-color: rgba(211,47,47,.4); background: rgba(211,47,47,.06); color: #ff6b6b; }
+.section-label.blue  { border-color: rgba(0,212,255,.3); background: rgba(0,212,255,.05); color: var(--electric); }
+
+/* ================================================
+   SECCIÓN ABOUT — "QUIÉNES SOMOS"
+   ================================================ */
+#about {
+  padding: 130px 80px;
+  background: var(--about-bg, linear-gradient(180deg, #0a0e1a 0%, #0c1220 50%, #0a0e1a 100%));
+}
+.about-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 55% 41%;
+  gap: 80px; align-items: center;
+}
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.8vw, 50px);
+  line-height: 1.15; margin-bottom: 24px;
+}
+.about-text h2 .andina { color: var(--gold); }
+.about-text p { color: var(--text-secondary, var(--soft-blue)); font-size: 16px; line-height: 1.75; margin-bottom: 16px; }
+.about-text p strong { color: var(--white); }
+
+/* Contadores animados (proyectos, empresas) */
+.counters { display: flex; gap: 60px; margin-top: 36px; }
+.counter-icon {
+  width: 42px; height: 42px;
+  background: rgba(0,212,255,.1);
+  border: 1px solid rgba(0,212,255,.3);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px; color: var(--electric); font-size: 20px;
+}
+.counter-num { font-family: 'Rajdhani', sans-serif; font-size: 50px; font-weight: 700; color: var(--white); line-height: 1; }
+.counter-label { font-size: 11px; letter-spacing: 2px; color: var(--soft-blue); margin-top: 4px; }
+
+/* Imagen derecha del about con overlay de escaneo */
+.about-img-inner {
+  position: relative; border-radius: 24px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.25);
+  box-shadow: 0 0 50px rgba(0,212,255,.1);
+  aspect-ratio: 4/5; transition: transform .3s;
+}
+.about-img-inner:hover { transform: scale(1.02); }
+.about-img-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Efecto de línea de escaneo sobre la imagen del about */
+.scan-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,212,255,.05) 50%, transparent 60%);
+  animation: scanImg 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes scanImg {
+  0%, 100% { transform: translateY(-100%); }
+  50%       { transform: translateY(100%); }
+}
+
+/* Badge de ubicación "📍 LA PAZ, BOLIVIA" */
+.location-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(10,14,26,.85);
+  border: 1px solid rgba(0,212,255,.3);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 12px; letter-spacing: 1.5px; color: var(--electric);
+  display: flex; align-items: center; gap: 6px;
+  animation: badgeBounce 3s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+}
+@keyframes badgeBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* Leyenda inferior de la imagen del about */
+.img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(5,8,16,.9));
+}
+.img-caption .cap-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.img-caption .cap-sub   { font-size: 12px; color: var(--soft-blue); }
+
+/* ================================================
+   SECCIÓN DE IMÁGENES EXTRA — "NUESTRA ESENCIA"
+   Tres imágenes adicionales: IA / Illimani / Código
+   ================================================ */
+#extra-images { padding: 80px 80px 40px; background: linear-gradient(180deg, var(--section-bg-1, #0a0e1a), var(--section-bg-2, #0b1120)); }
+.extra-images-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.extra-img-card {
+  position: relative; border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.18);
+  box-shadow: 0 0 30px rgba(0,212,255,.07);
+  transition: transform .35s, box-shadow .35s;
+  cursor: default;
+}
+.extra-img-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 55px rgba(0,212,255,.2);
+}
+.extra-img-card img {
+  width: 100%; height: 200px; object-fit: cover; display: block;
+  filter: brightness(.85) saturate(1.2);
+  transition: filter .35s;
+}
+.extra-img-card:hover img { filter: brightness(1) saturate(1.5); }
+.extra-img-card .eic-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(transparent, rgba(5,8,16,.9));
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px; color: var(--electric);
+}
+
+/* ================================================
+   SECCIÓN SERVICES — "SERVICIOS"
+   Cuatro tarjetas de servicio en grilla 2×2
+   ================================================ */
+#services { padding: 130px 80px; background: linear-gradient(180deg, var(--section-bg-1, #0a0e1a), var(--section-bg-2, #0b1120)); }
+.services-header { text-align: center; margin-bottom: 70px; }
+.services-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,50px); margin-bottom: 12px; }
+.services-header h2 .gold { color: var(--gold); }
+.services-header p { color: var(--soft-blue); font-size: 16px; }
+
+/* Decoración de circuito entre el subtítulo y las tarjetas */
+.circuit-deco { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 16px; }
+.circuit-deco .line     { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.4)); }
+.circuit-deco .line.rev { background: linear-gradient(90deg, rgba(0,212,255,.4), transparent); }
+.circuit-deco .dot      { width: 4px; height: 4px; background: var(--electric); border-radius: 50%; box-shadow: 0 0 6px var(--electric); }
+
+.services-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+
+/* Tarjeta de servicio individual */
+.service-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.9));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 36px;
+  overflow: hidden; transition: all .35s; cursor: default;
+}
+.service-card:hover {
+  border-color: rgba(0,212,255,.25);
+  box-shadow: 0 0 50px rgba(0,212,255,.08);
+  transform: translateY(-5px);
+}
+
+/* Número decorativo de la tarjeta (fondo semitransparente) */
+.svc-num {
+  position: absolute; top: 20px; right: 24px;
+  font-family: 'Space Mono', monospace; font-size: 48px; font-weight: 700;
+  color: rgba(212,175,55,.06); line-height: 1; user-select: none;
+}
+
+/* Ícono de la tarjeta de servicio con colores por categoría */
+.svc-icon {
+  width: 50px; height: 50px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 20px; transition: transform .3s;
+}
+.svc-icon.blue  { background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.3); color: var(--electric); }
+.svc-icon.gold  { background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.3); color: var(--gold); }
+.svc-icon.green { background: rgba(76,175,80,.1);  border: 1px solid rgba(76,175,80,.3);  color: #4CAF50; }
+.svc-icon.red   { background: rgba(211,47,47,.1);  border: 1px solid rgba(211,47,47,.3);  color: #ff6b6b; }
+
+.svc-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.svc-desc  { font-size: 14px; color: rgba(184,216,235,.7); line-height: 1.65; margin-bottom: 20px; }
+
+/* "Saber más →" aparece al hacer hover en la tarjeta */
+.svc-more {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; letter-spacing: 1px; color: var(--electric);
+  opacity: 0; transform: translateX(-8px); transition: all .3s;
+}
+.service-card:hover .svc-more { opacity: 1; transform: translateX(0); }
+
+/* Esquinas decorativas neón que aparecen al hover */
+.corner-tl, .corner-br {
+  position: absolute; width: 20px; height: 20px;
+  opacity: 0; transition: opacity .3s;
+}
+.corner-tl { top: 10px; left: 10px; border-top: 2px solid var(--electric); border-left: 2px solid var(--electric); }
+.corner-br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--electric); border-right: 2px solid var(--electric); }
+.service-card:hover .corner-tl,
+.service-card:hover .corner-br { opacity: 1; }
+
+/* ================================================
+   SECCIÓN GALLERY — "GALERÍA"
+   Grilla asimétrica con imágenes de La Paz y tecnología.
+   Las imágenes tienen formas orgánicas (border-radius grandes).
+   ================================================ */
+/* ================================================
+   GALERÍA EXPAND — estilo accordion horizontal
+   ================================================ */
+.galeria-expand {
+  display: flex;
+  width: 90%;
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,212,255,.2);
+  box-shadow: 0 0 50px rgba(0,212,255,.1);
+}
+.galeria-expand img {
+  width: 0px;
+  flex-grow: 1;
+  object-fit: cover;
+  filter: brightness(60%) saturate(1.1);
+  transition: .7s ease;
+  cursor: pointer;
+}
+.galeria-expand img:hover {
+  width: 500px;
+  filter: brightness(110%) saturate(1.4);
+  box-shadow: inset 0 0 30px rgba(0,212,255,.2);
+}#gallery { padding: 130px 80px; background: var(--section-bg-1, var(--bg)); }
+.gallery-header { text-align: center; margin-bottom: 60px; }
+.gallery-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,48px); margin-bottom: 10px; }
+.gallery-header h2 .gold { color: var(--gold); }
+.gallery-header p { color: var(--soft-blue); font-size: 16px; }
+
+.gallery-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.gallery-item { position: relative; overflow: hidden; cursor: default; transition: transform .4s; }
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.gallery-item:hover img { transform: scale(1.08); }
+
+/* Formas orgánicas para cada tipo de elemento de galería */
+.gallery-item.tall { border-radius: 55% 55% 45% 45% / 25% 25% 18% 18%; }
+.gallery-item.wide { border-radius: 35% 35% 35% 35% / 55% 55% 55% 55%; }
+.gallery-item.sq   { border-radius: 36px; }
+
+/* Overlay con caption al hacer hover */
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,212,255,.07);
+  opacity: 0; transition: opacity .3s;
+  display: flex; align-items: flex-end; padding: 20px;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--white); text-shadow: 0 0 12px rgba(0,212,255,.9); }
+
+/* Borde punteado neón animado que aparece al hover */
+.gallery-item::after {
+  content: '';
+  position: absolute; inset: 0;
+  border: 2px dashed rgba(0,212,255,.55);
+  border-radius: inherit;
+  opacity: 0; transition: opacity .3s;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+/* ================================================
+   SECCIÓN CONTACT — "CONTACTO"
+   Formulario de contacto con datos de la empresa
+   ================================================ */
+#contact { padding: 130px 80px; background: linear-gradient(180deg, var(--section-bg-1, #0a0e1a), var(--section-bg-2, #0c1220)); }
+.contact-header { text-align: center; margin-bottom: 60px; }
+.contact-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,48px); margin-bottom: 12px; }
+.contact-header h2 .gold { color: var(--gold); }
+.contact-header p { color: var(--soft-blue); font-size: 16px; max-width: 580px; margin: 0 auto; }
+
+.contact-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 38% 58%; gap: 60px; align-items: start; }
+.contact-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.contact-card {
+  background: var(--card-bg, rgba(15,22,40,.6));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px; padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: all .3s; backdrop-filter: blur(10px);
+}
+.contact-card:hover {
+  border-color: rgba(0,212,255,.25);
+  transform: translateX(5px);
+  box-shadow: 0 0 20px rgba(0,212,255,.06);
+}
+.cc-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.cc-icon.blue  { background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.25); color: var(--electric); }
+.cc-icon.gold  { background: rgba(212,175,55,.1); border: 1px solid rgba(212,175,55,.25); color: var(--gold); }
+.cc-icon.green { background: rgba(76,175,80,.1);  border: 1px solid rgba(76,175,80,.25);  color: #4CAF50; }
+.cc-label { font-size: 11px; letter-spacing: 1.5px; color: var(--soft-blue); margin-bottom: 3px; }
+.cc-value { font-size: 14px; font-weight: 600; }
+
+/* Botones de redes sociales */
+.social-title { font-size: 11px; letter-spacing: 2px; color: var(--soft-blue); margin-bottom: 12px; }
+.social-links { display: flex; gap: 12px; }
+.social-btn {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; cursor: pointer; transition: all .3s;
+  color: var(--soft-blue); text-decoration: none; font-weight: 700;
+}
+.social-btn:hover {
+  transform: rotate(360deg) scale(1.1);
+  background: rgba(0,212,255,.1);
+  border-color: var(--electric); color: var(--electric);
+}
+
+/* Tarjeta del formulario de contacto con efecto tilt 3D */
+.form-card {
+  background: var(--glassmorphism, rgba(15,22,40,.65));
+  border: 1px solid rgba(0,212,255,.12);
+  border-radius: 20px; padding: 40px;
+  backdrop-filter: blur(20px);
+  transition: transform .15s ease-out;
+  box-shadow: 0 0 60px rgba(0,212,255,.04);
+}
+.form-field { margin-bottom: 24px; }
+.form-field label { display: block; font-size: 13px; letter-spacing: 1px; color: var(--soft-blue); margin-bottom: 8px; }
+.field-wrap { position: relative; display: flex; align-items: center; }
+.field-icon { position: absolute; left: 14px; color: rgba(184,216,235,.4); font-size: 16px; transition: color .3s; pointer-events: none; }
+
+/* Inputs y textarea del formulario */
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  background: var(--input-bg, rgba(10,14,26,.8));
+  border: 1px solid var(--input-border, rgba(255,255,255,.08));
+  border-radius: 10px; padding: 14px 14px 14px 44px;
+  color: var(--white); font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; outline: none; transition: all .3s; resize: none;
+}
+.form-field textarea { height: 120px; }
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--electric);
+  box-shadow: 0 0 0 1px rgba(0,212,255,.2), 0 0 20px rgba(0,212,255,.08);
+  background: rgba(0,212,255,.03);
+}
+
+/* Línea neón que aparece debajo del campo al tener foco */
+.field-line {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 2px;
+  background: var(--electric);
+  transition: width .4s; border-radius: 1px;
+  box-shadow: 0 0 8px var(--electric); pointer-events: none;
+}
+
+/* Contador de caracteres del textarea */
+.char-count { text-align: right; font-size: 11px; color: rgba(184,216,235,.4); margin-top: 6px; font-family: 'Space Mono', monospace; }
+
+/* Botón de envío del formulario */
+.btn-submit {
+  width: 100%; padding: 16px;
+  background: var(--electric); color: #0a0e1a;
+  border: none; border-radius: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 2px;
+  cursor: pointer; transition: all .3s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 0 20px rgba(0,212,255,.3);
+}
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0,212,255,.55); }
+
+/* Animación de sacudida cuando el formulario está incompleto */
+@keyframes shake {
+  0%, 100%  { transform: translateX(0); }
+  20%        { transform: translateX(-8px); }
+  40%        { transform: translateX(8px); }
+  60%        { transform: translateX(-5px); }
+  80%        { transform: translateX(5px); }
+}
+.shake { animation: shake .4s ease; }
+
+/* ================================================
+   FOOTER — PIE DE PÁGINA
+   ================================================ */
+footer { background: var(--footer-bg, var(--darker)); padding: 80px 80px 0; position: relative; z-index: 2; }
+
+/* Grilla de 4 columnas con links del footer */
+.footer-top {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 40px; padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.footer-col-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--electric); margin-bottom: 20px; }
+.footer-col a { display: block; color: rgba(184,216,235,.55); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: var(--white); }
+
+/* Parte inferior del footer: branding + redes sociales */
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 40px 0; }
+.footer-brand .big-name { font-family: 'Rajdhani', sans-serif; font-size: 54px; font-weight: 700; line-height: 1; color: var(--electric); }
+.footer-brand .big-name .ai { color: var(--gold); }
+.footer-brand p { color: rgba(184,216,235,.45); font-size: 13px; margin-top: 6px; }
+.footer-right { text-align: right; }
+.footer-right p { color: rgba(184,216,235,.4); font-size: 13px; margin-bottom: 16px; }
+
+/* Franja tricolor boliviana al final del footer */
+.bolivian-stripe { display: flex; height: 4px; }
+.bolivian-stripe div { flex: 1; }
+.s-red    { background: #D32F2F; }
+.s-yellow { background: #FFC107; }
+.s-green  { background: #4CAF50; }
+
+/* ================================================
+   GATITO MASCOTA IA — ESQUINA INFERIOR DERECHA
+   Mascota SVG animada con mensajes en nubecita.
+   Aparece mensajes automáticos cada 8–15 segundos.
+   Al hacer clic muestra el siguiente mensaje.
+   ================================================ */
+#cat-wrap {
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 500;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+
+/* Nubecita de mensaje sobre el gatito */
+.cat-bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: rgba(15,22,40,.97);
+  border: 1.5px solid rgba(0,212,255,.35);
+  border-radius: 18px 18px 6px 18px;
+  padding: 10px 16px;
+  font-size: 13px; white-space: nowrap;
+  pointer-events: none;
+  opacity: 0; transform: translateY(8px) scale(.9);
+  transition: all .35s cubic-bezier(.34,1.56,.64,1);
+  backdrop-filter: blur(12px);
+  color: var(--white);
+  box-shadow: 0 0 18px rgba(0,212,255,.15);
+  min-width: 160px; text-align: center;
+}
+/* Colita triangular inferior de la nube */
+.cat-bubble::after {
+  content: '';
+  position: absolute; bottom: -10px; right: 18px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid rgba(0,212,255,.35);
+}
+/* Estado visible de la nubecita */
+.cat-bubble.visible { opacity: 1; transform: translateY(0) scale(1); }
+.cat-bubble .cloud-icon { font-size: 18px; display: block; margin-bottom: 4px; opacity: .7; }
+
+/* SVG del gatito con animación de flotación idle */
+#cat-svg {
+  cursor: pointer;
+  transition: transform .3s ease;
+  filter: drop-shadow(0 0 12px rgba(0,212,255,.4));
+  animation: catIdle 3.5s ease-in-out infinite;
+}
+@keyframes catIdle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%       { transform: translateY(-5px) rotate(-2deg); }
+  75%       { transform: translateY(-3px) rotate(2deg); }
+}
+
+/* Botón pequeño de WhatsApp debajo del gato */
+.cat-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(15,22,40,.9);
+  border: 1px solid rgba(37,211,102,.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; transition: all .3s;
+  backdrop-filter: blur(10px); color: #25D366;
+}
+.cat-btn:hover { background: rgba(37,211,102,.18); transform: scale(1.1); border-color: #25D366; }
+
+/* ================================================
+   BOTÓN FLOTANTE DE WHATSAPP — ESQUINA INFERIOR DERECHA
+   Botón verde grande con ícono oficial de WhatsApp.
+   Tiene animación de pulso para llamar la atención.
+   ================================================ */
+#whatsapp-btn {
+  position: fixed;
+  bottom: 110px; right: 24px;
+  z-index: 600;
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45), 0 0 0 0 rgba(37,211,102,.4);
+  animation: waPulse 2.5s ease-in-out infinite;
+  text-decoration: none; transition: transform .3s, box-shadow .3s;
+}
+#whatsapp-btn:hover { transform: scale(1.12); box-shadow: 0 6px 30px rgba(37,211,102,.65); }
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,.45), 0 0 0 0 rgba(37,211,102,.4); }
+  50%       { box-shadow: 0 4px 20px rgba(37,211,102,.45), 0 0 0 12px rgba(37,211,102,.0); }
+}
+#whatsapp-btn svg { width: 30px; height: 30px; fill: white; }
+
+/* Tooltip "¡Escríbenos!" que aparece al hacer hover */
+#whatsapp-btn::before {
+  content: '¡Escríbenos!';
+  position: absolute; right: 66px;
+  background: rgba(10,14,26,.95);
+  border: 1px solid rgba(37,211,102,.4);
+  border-radius: 8px; padding: 6px 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #25D366;
+  white-space: nowrap; opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+#whatsapp-btn:hover::before { opacity: 1; }
+
+/* ================================================
+   HERO VIDEO — EMBED DE YOUTUBE DEBAJO DEL LOGO
+   Enmarcado con bordes neón y esquinas decorativas.
+   ================================================ */
+.hero-video-wrap {
+  position: relative; z-index: 2;
+  width: min(680px, 90vw);
+  margin: 28px auto 0;
+  border-radius: 18px; overflow: hidden;
+  border: 1.5px solid rgba(0,212,255,.3);
+  box-shadow: 0 0 50px rgba(0,212,255,.18), 0 0 0 1px rgba(0,212,255,.08);
+  background: #000;
+}
+.hero-video-wrap iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+/* Esquinas decorativas del frame de video (pseudo-elementos) */
+.hero-video-wrap::before,
+.hero-video-wrap::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  border-color: var(--electric); border-style: solid;
+  z-index: 5; pointer-events: none;
+}
+.hero-video-wrap::before { top: 0; left: 0; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.hero-video-wrap::after  { bottom: 0; right: 0; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+/* ================================================
+   SECCIÓN BLOG
+   ================================================ */
+#blog { padding: 120px 80px; background: linear-gradient(180deg, var(--section-bg-1, #0a0e1a), var(--section-bg-2, #0c1220)); }
+.blog-header { text-align: center; margin-bottom: 60px; }
+.blog-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,48px); margin-bottom: 10px; }
+.blog-header h2 .gold { color: var(--gold); }
+.blog-header p { color: var(--soft-blue); font-size: 16px; }
+
+.blog-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+/* Tarjeta de entrada de blog */
+.blog-card {
+  background: var(--blog-card-bg, linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.95)));
+  border: 1px solid var(--card-border, rgba(255,255,255,.06));
+  border-radius: 16px; overflow: hidden;
+  transition: all .35s; cursor: default;
+}
+.blog-card:hover {
+  border-color: rgba(0,212,255,.25);
+  box-shadow: 0 0 40px rgba(0,212,255,.1);
+  transform: translateY(-6px);
+}
+.blog-card-img {
+  width: 100%; height: 170px; object-fit: cover; display: block;
+  transition: transform .4s, filter .4s;
+  filter: brightness(.85) saturate(1.1);
+}
+.blog-card:hover .blog-card-img { transform: scale(1.05); filter: brightness(1) saturate(1.3); }
+.blog-card-body { padding: 22px 22px 26px; }
+
+/* Etiqueta de categoría del blog */
+.blog-tag {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 10px;
+  font-weight: 700; letter-spacing: 2px; margin-bottom: 10px;
+}
+.blog-tag.blue  { background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.3); color: var(--electric); }
+.blog-tag.gold  { background: rgba(212,175,55,.1);  border: 1px solid rgba(212,175,55,.3); color: var(--gold); }
+.blog-tag.green { background: rgba(76,175,80,.1);   border: 1px solid rgba(76,175,80,.3);  color: #4CAF50; }
+
+.blog-card-title   { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
+.blog-card-excerpt { font-size: 13px; color: rgba(184,216,235,.65); line-height: 1.65; margin-bottom: 16px; }
+.blog-card-meta    { display: flex; align-items: center; justify-content: space-between; font-size: 11px; letter-spacing: 1px; color: rgba(184,216,235,.4); }
+
+/* "Leer más →" aparece al hacer hover en la tarjeta */
+.blog-card-read {
+  color: var(--electric); font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+  display: flex; align-items: center; gap: 4px;
+  opacity: 0; transform: translateX(-6px); transition: all .3s;
+}
+.blog-card:hover .blog-card-read { opacity: 1; transform: translateX(0); }
+
+/* ================================================
+   SECCIÓN CONTENIDO — VIDEOS Y TUTORIALES
+   ================================================ */
+#contenido { padding: 120px 80px; background: linear-gradient(180deg, var(--section-bg-2, #0b1120), var(--section-bg-1, #0a0e1a)); }
+.contenido-header { text-align: center; margin-bottom: 60px; }
+.contenido-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,48px); margin-bottom: 10px; }
+.contenido-header h2 .gold { color: var(--gold); }
+.contenido-header p { color: var(--soft-blue); font-size: 16px; }
+
+/* Video principal con borde decorativo */
+.video-featured-wrap {
+  max-width: 860px; margin: 0 auto 60px;
+  border-radius: 20px; overflow: hidden;
+  border: 1.5px solid rgba(0,212,255,.3);
+  box-shadow: 0 0 60px rgba(0,212,255,.15);
+  background: #000; position: relative;
+}
+.video-featured-wrap iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.video-featured-label {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(10,14,26,.9);
+  border: 1px solid rgba(0,212,255,.35);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--electric);
+  backdrop-filter: blur(10px); pointer-events: none;
+}
+
+/* Grilla de videos secundarios */
+.videos-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.video-card {
+  background: var(--blog-card-bg, linear-gradient(135deg, rgba(15,22,40,.9), rgba(10,14,26,.95)));
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px; overflow: hidden; transition: all .35s; cursor: default;
+}
+.video-card:hover {
+  border-color: rgba(0,212,255,.3);
+  box-shadow: 0 0 35px rgba(0,212,255,.12);
+  transform: translateY(-5px);
+}
+.video-thumb-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+.video-thumb-wrap iframe { width: 100%; height: 100%; display: block; border: none; }
+.video-card-body { padding: 16px 18px 20px; }
+.video-card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px; line-height: 1.4; }
+.video-card-desc  { font-size: 12px; color: rgba(184,216,235,.6); line-height: 1.6; }
+.video-card-meta  { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 11px; letter-spacing: 1px; color: rgba(184,216,235,.4); }
+
+/* ================================================
+   ANIMACIÓN DE REVEAL AL HACER SCROLL
+   Los elementos con clase .reveal se animan al entrar
+   en el viewport con IntersectionObserver (JS)
+   ================================================ */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+/* ================================================
+   RESPONSIVE — AJUSTES PARA PANTALLAS < 900px
+   ================================================ */
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }  /* El menú hamburguesa no está implementado aquí */
+  #about, #services, #gallery, #contact { padding: 80px 24px; }
+  #extra-images { padding: 60px 24px 30px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .extra-images-grid { grid-template-columns: 1fr; gap: 16px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .videos-grid { grid-template-columns: 1fr; }
+  #blog, #contenido { padding: 80px 24px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  footer { padding: 60px 24px 0; }
+  .footer-top { grid-template-columns: repeat(2,1fr); }
+  .footer-bottom { flex-direction: column; gap: 30px; text-align: center; }
+  .footer-right { text-align: center; }
+  #whatsapp-btn { bottom: 100px; }
+  /* Ajustes de las secciones SPA en móvil */
+  .spa-header { padding: 80px 24px 40px; }
+  .spa-body { padding: 40px 24px 80px; }
+  .spa-services-grid { grid-template-columns: 1fr; }
+  .spa-blog-grid { grid-template-columns: 1fr; }
+  .spa-videos-grid { grid-template-columns: 1fr; }
+  .spa-contact-grid { grid-template-columns: 1fr; }
+  .spa-features-grid { grid-template-columns: 1fr; }
+}
+/* === SERVICIOS 3D NUEVO === */
+.srv-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 0 80px 80px;
+}
+.srv-card {
+  background: linear-gradient(135deg, rgba(0,212,255,.08), rgba(0,180,220,.04));
+  border: 1.5px solid rgba(0,212,255,.35);
+  border-radius: 20px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  cursor: default;
+  box-shadow: 0 0 20px rgba(0,212,255,.08), inset 0 0 30px rgba(0,212,255,.03);
+}
+.srv-card:hover {
+  transform: perspective(800px) rotateX(-4deg) rotateY(4deg) translateY(-8px);
+  border-color: rgba(0,212,255,.7);
+  box-shadow: 0 20px 60px rgba(0,212,255,.2), 0 0 40px rgba(0,212,255,.15), inset 0 0 40px rgba(0,212,255,.05);
+}
+.srv-num {
+  position: absolute;
+  top: 12px; right: 16px;
+  font-size: 52px;
+  font-weight: 700;
+  color: rgba(0,212,255,.07);
+  line-height: 1;
+  font-family: 'Space Mono', monospace;
+}
+.srv-icon-wrap {
+  width: 54px; height: 54px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+  transition: transform 0.4s ease;
+}
+.srv-icon-wrap.blue  { background: rgba(0,212,255,.12); border: 1.5px solid rgba(0,212,255,.4); }
+.srv-icon-wrap.gold  { background: rgba(212,175,55,.12); border: 1.5px solid rgba(212,175,55,.4); }
+.srv-icon-wrap.green { background: rgba(76,175,80,.12);  border: 1.5px solid rgba(76,175,80,.4); }
+.srv-icon-wrap.red   { background: rgba(211,47,47,.12);  border: 1.5px solid rgba(211,47,47,.4); }
+.srv-card:hover .srv-icon-wrap { transform: scale(1.15) rotate(-5deg); }
+.srv-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0 0 10px;
+  font-family: 'Playfair Display', serif;
+}
+.srv-desc {
+  font-size: 14px;
+  color: rgba(184,216,235,.75);
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+.srv-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.srv-tag {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,212,255,.25);
+  color: var(--electric);
+  background: rgba(0,212,255,.06);
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.srv-more {
+  position: absolute;
+  bottom: 22px; right: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--electric);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+.srv-card:hover .srv-more { opacity: 1; transform: translateX(0); }
+.srv-line {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px var(--electric);
+}
+.srv-card:hover .srv-line { width: 100%; }/* === IRON MAN SERVICIOS === */
+@keyframes ironPulse {
+  0%,100%{opacity:1;box-shadow:0 0 10px #FF6A00;}
+  50%{opacity:.4;box-shadow:0 0 20px #FF6A00;}
+}
+@keyframes ironScan {
+  0%{top:-2px;opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{top:100%;opacity:0;}
+}
+@keyframes ironParticle {
+  0%,100%{transform:translateY(0) scale(0);opacity:0;}
+  50%{transform:translateY(-25px) scale(1.5);opacity:1;}
+}
+@keyframes ironBarLoad {
+  from{width:0}
+}
+.iron-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:28px;
+}
+.iron-card {
+  position:relative;
+  background:linear-gradient(135deg,rgba(20,8,0,.95),rgba(10,5,0,.98));
+  border:1.5px solid rgba(255,106,0,.25);
+  border-radius:20px;
+  padding:36px 30px 32px;
+  overflow:hidden;
+  cursor:default;
+  transform-style:preserve-3d;
+  transition:transform .5s ease,border-color .4s,box-shadow .4s;
+}
+.iron-card:hover {
+  transform:perspective(900px) rotateX(-4deg) rotateY(4deg) translateY(-10px) scale(1.02);
+  border-color:#FF6A00;
+  box-shadow:0 30px 80px rgba(255,106,0,.2),0 0 60px rgba(255,106,0,.1),0 0 0 1px rgba(255,106,0,.4),inset 0 0 40px rgba(255,106,0,.03);
+}
+.iron-scan {
+  position:absolute;
+  left:0;right:0;top:-2px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#FF6A00,#FFD700,#FF6A00,transparent);
+  box-shadow:0 0 12px #FF6A00;
+  opacity:0;
+  animation:ironScan 4s ease-in-out infinite;
+}
+.iron-card:hover .iron-scan{animation-duration:2s;}
+.iron-corner {
+  position:absolute;
+  width:16px;height:16px;
+  border-color:rgba(255,106,0,.3);
+  border-style:solid;
+  transition:border-color .3s,width .3s,height .3s;
+}
+.iron-card:hover .iron-corner{border-color:#FF6A00;width:22px;height:22px;}
+.iron-corner.tl{top:10px;left:10px;border-width:2px 0 0 2px;border-radius:4px 0 0 0;}
+.iron-corner.tr{top:10px;right:10px;border-width:2px 2px 0 0;border-radius:0 4px 0 0;}
+.iron-corner.bl{bottom:10px;left:10px;border-width:0 0 2px 2px;border-radius:0 0 0 4px;}
+.iron-corner.br{bottom:10px;right:10px;border-width:0 2px 2px 0;border-radius:0 0 4px 0;}
+.iron-hud {
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:20px;
+  font-family:'Space Mono',monospace;
+  font-size:11px;letter-spacing:2px;
+  color:rgba(255,106,0,.6);
+}
+.iron-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:#FF6A00;
+  box-shadow:0 0 8px #FF6A00;
+  animation:ironPulse 1.5s ease-in-out infinite;
+}
+.iron-icon {
+  font-size:50px;
+  display:block;
+  margin-bottom:16px;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .4s;
+  filter:drop-shadow(0 0 0px #FF6A00);
+}
+.iron-card:hover .iron-icon {
+  transform:scale(1.2) rotate(-8deg) translateY(-5px);
+  filter:drop-shadow(0 0 16px #FF6A00);
+}
+.iron-title {
+  font-family:'Playfair Display',serif;
+  font-size:21px;font-weight:700;
+  color:#FFD700;
+  margin-bottom:10px;
+  transition:text-shadow .3s;
+}
+.iron-card:hover .iron-title{text-shadow:0 0 20px rgba(255,215,0,.4);}
+.iron-line {
+  height:1px;
+  background:linear-gradient(90deg,#FF6A00,rgba(255,106,0,.1));
+  margin-bottom:14px;
+  transition:background .3s;
+}
+.iron-desc {
+  font-size:14px;
+  color:rgba(255,180,100,.65);
+  line-height:1.75;
+  margin-bottom:18px;
+}
+.iron-tags {
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.iron-tags span {
+  font-size:11px;font-weight:700;
+  letter-spacing:1.5px;
+  padding:4px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,106,0,.35);
+  color:#FF6A00;
+  background:rgba(255,106,0,.05);
+  transition:all .3s;
+}
+.iron-card:hover .iron-tags span{
+  border-color:#FF6A00;
+  background:rgba(255,106,0,.12);
+  box-shadow:0 0 8px rgba(255,106,0,.2);
+}
+.iron-bar-wrap {
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;
+}
+.iron-bar-label {
+  font-family:'Space Mono',monospace;
+  font-size:10px;letter-spacing:2px;
+  color:rgba(255,106,0,.5);
+  white-space:nowrap;
+}
+.iron-bar-track {
+  flex:1;height:4px;
+  background:rgba(255,106,0,.1);
+  border-radius:2px;overflow:hidden;
+}
+.iron-bar-fill {
+  height:100%;
+  background:linear-gradient(90deg,#FF6A00,#FFD700);
+  border-radius:2px;
+  box-shadow:0 0 8px #FF6A00;
+  animation:ironBarLoad 1.5s ease forwards;
+}
+.iron-bar-val {
+  font-family:'Space Mono',monospace;
+  font-size:11px;color:#FFD700;
+  font-weight:700;
+}
+.iron-btn {
+  display:inline-flex;
+  align-items:center;
+  padding:10px 22px;
+  background:linear-gradient(135deg,rgba(255,106,0,.15),rgba(255,215,0,.08));
+  border:1.5px solid rgba(255,106,0,.4);
+  border-radius:8px;
+  font-size:12px;font-weight:700;
+  letter-spacing:2px;color:#FF6A00;
+  opacity:0;transform:translateY(8px);
+  transition:all .3s ease;
+  cursor:pointer;
+}
+.iron-card:hover .iron-btn{opacity:1;transform:translateY(0);}
+.iron-btn:hover{background:rgba(255,106,0,.25);box-shadow:0 0 20px rgba(255,106,0,.3);}
+.iron-particles{position:absolute;inset:0;pointer-events:none;}
+.iron-particles i {
+  position:absolute;
+  width:4px;height:4px;border-radius:50%;
+  background:#FF6A00;opacity:0;
+  animation:ironParticle 3s ease-in-out infinite;
+}
+.iron-card:hover .iron-particles i{opacity:1;}
+.iron-particles i:nth-child(1){top:15%;left:8%;animation-delay:0s;}
+.iron-particles i:nth-child(2){top:55%;left:88%;animation-delay:.4s;background:#FFD700;}
+.iron-particles i:nth-child(3){top:80%;left:15%;animation-delay:.8s;}
+.iron-particles i:nth-child(4){top:25%;left:75%;animation-delay:1.2s;background:#FFD700;}
+.iron-particles i:nth-child(5){top:70%;left:45%;animation-delay:1.6s;}
+.iron-particles i:nth-child(6){top:40%;left:30%;animation-delay:2s;background:#FFD700;}
+@media(max-width:900px){.iron-grid{grid-template-columns:1fr;}}/* === CONTACTO ESTILO MENSAJERÍA === */
+@keyframes planefly1 {
+  0%   { transform: translate(-100px, 0) rotate(10deg); opacity:0; }
+  10%  { opacity:1; }
+  90%  { opacity:1; }
+  100% { transform: translate(110vw, -80px) rotate(-5deg); opacity:0; }
+}
+@keyframes planefly2 {
+  0%   { transform: translate(-100px, 0) rotate(5deg); opacity:0; }
+  10%  { opacity:.7; }
+  90%  { opacity:.7; }
+  100% { transform: translate(110vw, 40px) rotate(10deg); opacity:0; }
+}
+@keyframes planefly3 {
+  0%   { transform: translate(110vw, 0) rotate(-170deg); opacity:0; }
+  10%  { opacity:.5; }
+  90%  { opacity:.5; }
+  100% { transform: translate(-100px, -60px) rotate(-160deg); opacity:0; }
+}
+@keyframes planefly4 {
+  0%   { transform: translate(-100px, 0) rotate(15deg); opacity:0; }
+  10%  { opacity:.6; }
+  90%  { opacity:.6; }
+  100% { transform: translate(110vw, -120px) rotate(-8deg); opacity:0; }
+}
+@keyframes planeSend {
+  0%   { transform: translateX(0) rotate(0deg); opacity:1; }
+  100% { transform: translateX(300px) rotate(-20deg); opacity:0; }
+}
+@keyframes msgBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.planes-container {
+  position: absolute;
+  inset: 0; pointer-events: none;
+  overflow: hidden; z-index: 0;
+}
+.plane {
+  position: absolute;
+  font-size: 22px;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(0,212,255,.4));
+}
+.p1 { top: 15%; animation: planefly1 12s linear 2s infinite; }
+.p2 { top: 45%; animation: planefly2 18s linear 6s infinite; font-size:16px; }
+.p3 { top: 70%; animation: planefly3 15s linear 4s infinite; font-size:14px; }
+.p4 { top: 30%; animation: planefly4 20s linear 9s infinite; font-size:18px; }
+
+/* Tarjetas de contacto estilo burbuja */
+.msg-card-blue {
+  background: rgba(0,212,255,.06) !important;
+  border: 1.5px solid rgba(0,212,255,.35) !important;
+  box-shadow: 0 0 20px rgba(0,212,255,.08);
+  position: relative;
+}
+.msg-card-blue:hover {
+  border-color: rgba(0,212,255,.7) !important;
+  box-shadow: 0 0 30px rgba(0,212,255,.2) !important;
+  transform: translateX(8px) !important;
+}
+.msg-card-red {
+  background: rgba(255,60,60,.06) !important;
+  border: 1.5px solid rgba(255,60,60,.35) !important;
+  box-shadow: 0 0 20px rgba(255,60,60,.08);
+}
+.msg-card-red:hover {
+  border-color: rgba(255,60,60,.7) !important;
+  box-shadow: 0 0 30px rgba(255,60,60,.2) !important;
+  transform: translateX(8px) !important;
+}
+.msg-card-green {
+  background: rgba(37,211,102,.06) !important;
+  border: 1.5px solid rgba(37,211,102,.35) !important;
+  box-shadow: 0 0 20px rgba(37,211,102,.08);
+}
+.msg-card-green:hover {
+  border-color: rgba(37,211,102,.7) !important;
+  box-shadow: 0 0 30px rgba(37,211,102,.2) !important;
+  transform: translateX(8px) !important;
+}
+.msg-bubble-icon {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  animation: msgBounce 3s ease-in-out infinite;
+}
+.msg-time {
+  position: absolute;
+  bottom: 10px; right: 14px;
+  font-size: 10px; letter-spacing: 1px;
+  color: rgba(184,216,235,.35);
+  font-family: 'Space Mono', monospace;
+}
+
+/* Formulario estilo mensajería */
+.msg-form-wrap {
+  background: var(--glassmorphism, rgba(15,22,40,.7));
+  border: 1.5px solid rgba(0,212,255,.15);
+  border-radius: 24px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 60px rgba(0,212,255,.05);
+  position: relative;
+  overflow: hidden;
+}
+.msg-form-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #25D366, #00D4FF, #FF6B6B, #25D366);
+  background-size: 200%;
+  animation: gradientShift 4s linear infinite;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+/* Burbuja de bienvenida */
+.msg-welcome {
+  display: flex; align-items: flex-start;
+  gap: 12px; margin-bottom: 28px;
+}
+.msg-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(0,212,255,.1);
+  border: 1.5px solid rgba(0,212,255,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  animation: msgBounce 3s ease-in-out infinite;
+}
+.msg-bubble-in {
+  background: rgba(0,212,255,.08);
+  border: 1px solid rgba(0,212,255,.2);
+  border-radius: 4px 18px 18px 18px;
+  padding: 12px 16px;
+  max-width: 85%;
+}
+.msg-bubble-time {
+  display: block;
+  font-size: 10px; letter-spacing: 1px;
+  color: rgba(0,212,255,.4);
+  margin-top: 6px;
+  font-family: 'Space Mono', monospace;
+}
+
+/* Botón enviar con avioncito */
+.btn-send-plane {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, rgba(0,212,255,.15), rgba(0,180,220,.1));
+  border: 1.5px solid var(--electric);
+  border-radius: 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 2px; color: var(--electric);
+  cursor: pointer;
+  display: flex; align-items: center;
+  justify-content: center; gap: 12px;
+  transition: all .3s;
+  box-shadow: 0 0 20px rgba(0,212,255,.15);
+  overflow: hidden;
+}
+.btn-send-plane:hover {
+  background: rgba(0,212,255,.2);
+  box-shadow: 0 0 40px rgba(0,212,255,.35);
+  transform: translateY(-2px);
+}
+.btn-send-plane:hover .plane-icon {
+  animation: planeSend .6s ease forwards;
+}
+.plane-icon { font-size: 20px; display: inline-block; }
+/* ================================================
+   THEME TOGGLE BUTTON — BOTÓN DE TEMA
+   ================================================ */
+#themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(0,212,255,.08);
+  border: 1.5px solid rgba(0,212,255,.3);
+  cursor: pointer;
+  transition: all .35s cubic-bezier(.34,1.56,.64,1);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+#themeToggle:hover {
+  background: rgba(0,212,255,.18);
+  border-color: var(--electric);
+  box-shadow: 0 0 20px rgba(0,212,255,.35);
+  transform: scale(1.1) rotate(15deg);
+}
+.theme-icon {
+  font-size: 18px;
+  position: absolute;
+  transition: all .4s cubic-bezier(.34,1.56,.64,1);
+  line-height: 1;
+}
+.theme-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+.theme-sun  { opacity: 0; transform: rotate(90deg) scale(0); }
+[data-theme="light"] .theme-moon { opacity: 0; transform: rotate(-90deg) scale(0); }
+[data-theme="light"] .theme-sun  { opacity: 1; transform: rotate(0deg) scale(1); }
+
+/* ================================================
+   HAMBURGER MENU (MÓVIL)
+   ================================================ */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--electric);
+  border-radius: 2px;
+  transition: all .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Menú móvil overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 900;
+  background: var(--nav-bg-scrolled);
+  backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  transition: all .4s ease;
+}
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.mobile-menu a {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-decoration: none;
+  transition: color .3s;
+  position: relative;
+}
+.mobile-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--electric);
+  transition: width .3s;
+  box-shadow: 0 0 8px var(--electric);
+}
+.mobile-menu a:hover { color: var(--electric); }
+.mobile-menu a:hover::after { width: 100%; }
+
+/* ================================================
+   LIGHT MODE BODY OVERRIDES
+   ================================================ */
+[data-theme="light"] body {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+[data-theme="light"] #hero {
+  background: var(--hero-bg);
+}
+[data-theme="light"] #about {
+  background: linear-gradient(180deg, var(--section-bg-1) 0%, var(--section-bg-2) 50%, var(--section-bg-1) 100%);
+}
+[data-theme="light"] #services,
+[data-theme="light"] #extra-images,
+[data-theme="light"] #blog,
+[data-theme="light"] #gallery {
+  background: var(--section-bg-1);
+}
+[data-theme="light"] #contact {
+  background: linear-gradient(180deg, var(--section-bg-1), var(--section-bg-2));
+}
+[data-theme="light"] #contenido {
+  background: linear-gradient(180deg, var(--section-bg-2), var(--section-bg-1));
+}
+[data-theme="light"] footer {
+  background: var(--footer-bg);
+}
+[data-theme="light"] .spa-page {
+  background: var(--section-bg-1);
+}
+[data-theme="light"] .spa-body {
+  background: var(--section-bg-1) !important;
+}
+[data-theme="light"] nav.scrolled {
+  background: var(--nav-bg-scrolled);
+  border-bottom-color: rgba(0,136,187,.2);
+}
+[data-theme="light"] .about-text p {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .about-text p strong {
+  color: var(--text-primary);
+}
+[data-theme="light"] .hero-title .line1 {
+  color: var(--text-primary);
+}
+[data-theme="light"] .hero-sub {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .services-header p,
+[data-theme="light"] .gallery-header p,
+[data-theme="light"] .blog-header p,
+[data-theme="light"] .contenido-header p,
+[data-theme="light"] .contact-header p,
+[data-theme="light"] .spa-header p {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .services-header h2,
+[data-theme="light"] .gallery-header h2,
+[data-theme="light"] .blog-header h2,
+[data-theme="light"] .contenido-header h2,
+[data-theme="light"] .contact-header h2,
+[data-theme="light"] .spa-header h1 {
+  color: var(--text-primary);
+}
+[data-theme="light"] .service-card,
+[data-theme="light"] .srv-card,
+[data-theme="light"] .blog-card,
+[data-theme="light"] .spa-blog-card,
+[data-theme="light"] .video-card,
+[data-theme="light"] .spa-video-card,
+[data-theme="light"] .spa-service-card {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+  box-shadow: var(--shadow-card);
+}
+[data-theme="light"] .service-card:hover,
+[data-theme="light"] .srv-card:hover,
+[data-theme="light"] .blog-card:hover,
+[data-theme="light"] .spa-blog-card:hover {
+  box-shadow: var(--shadow-glow), var(--shadow-card);
+}
+[data-theme="light"] .svc-title,
+[data-theme="light"] .srv-title,
+[data-theme="light"] .blog-card-title,
+[data-theme="light"] .spa-blog-title,
+[data-theme="light"] .video-card-title,
+[data-theme="light"] .spa-svc-title {
+  color: var(--text-primary);
+}
+[data-theme="light"] .svc-desc,
+[data-theme="light"] .srv-desc,
+[data-theme="light"] .blog-card-excerpt,
+[data-theme="light"] .spa-blog-excerpt,
+[data-theme="light"] .video-card-desc {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .form-card,
+[data-theme="light"] .msg-form-wrap,
+[data-theme="light"] .spa-form-card {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(0,136,187,.2);
+}
+[data-theme="light"] .form-field input,
+[data-theme="light"] .form-field textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+[data-theme="light"] .form-field input::placeholder,
+[data-theme="light"] .form-field textarea::placeholder {
+  color: rgba(30,58,90,.4);
+}
+[data-theme="light"] .form-field label {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .contact-card,
+[data-theme="light"] .spa-contact-card {
+  background: rgba(255,255,255,.7);
+}
+[data-theme="light"] .cc-label,
+[data-theme="light"] .spa-cc-label {
+  color: var(--text-secondary);
+}
+[data-theme="light"] .cc-value {
+  color: var(--text-primary);
+}
+[data-theme="light"] .footer-col a {
+  color: var(--text-muted);
+}
+[data-theme="light"] .footer-col a:hover {
+  color: var(--text-primary);
+}
+[data-theme="light"] .footer-brand p,
+[data-theme="light"] .footer-right p {
+  color: var(--text-muted);
+}
+[data-theme="light"] .cat-bubble {
+  background: rgba(255,255,255,.97);
+  color: var(--text-primary);
+  border-color: rgba(0,136,187,.3);
+}
+[data-theme="light"] #cat-svg ellipse,
+[data-theme="light"] #cat-svg polygon {
+  fill: #d4e8f5;
+}
+[data-theme="light"] .spa-feature-card,
+[data-theme="light"] .spa-feature-desc {
+  background: rgba(255,255,255,.85);
+  color: var(--text-secondary);
+}
+[data-theme="light"] .spa-feature-title {
+  color: var(--text-primary);
+}
+[data-theme="light"] .section-label {
+  background: var(--section-bg-2);
+}
+[data-theme="light"] #particleCanvas {
+  opacity: var(--particle-opacity);
+}
+[data-theme="light"] .msg-bubble-in {
+  background: rgba(0,136,187,.06);
+  border-color: rgba(0,136,187,.15);
+}
+[data-theme="light"] .msg-bubble-in p {
+  color: var(--text-primary);
+}
+[data-theme="light"] .nav-links a {
+  color: var(--text-primary);
+}
+[data-theme="light"] .nav-logo-text {
+  color: var(--gold);
+}
+[data-theme="light"] .iron-card {
+  background: linear-gradient(135deg, rgba(255,248,240,.98), rgba(255,255,255,.95));
+  border-color: rgba(255,106,0,.2);
+}
+[data-theme="light"] .iron-desc {
+  color: rgba(120,60,10,.8);
+}
+[data-theme="light"] .iron-title {
+  color: #a05c00;
+}
+[data-theme="light"] .about-img-inner {
+  box-shadow: 0 0 40px rgba(0,136,187,.1);
+}
+[data-theme="light"] .extra-img-card {
+  border-color: rgba(0,136,187,.2);
+}
+[data-theme="light"] .galeria-expand {
+  border-color: rgba(0,136,187,.25);
+}
+[data-theme="light"] .spa-close {
+  background: rgba(0,136,187,.08);
+  border-color: rgba(0,136,187,.3);
+  color: var(--electric);
+}
+[data-theme="light"] .spa-header {
+  border-bottom-color: rgba(0,136,187,.1);
+}
+[data-theme="light"] .blog-card-meta,
+[data-theme="light"] .spa-blog-meta {
+  color: var(--text-muted);
+}
+[data-theme="light"] .video-card-meta,
+[data-theme="light"] .spa-video-meta {
+  color: var(--text-muted);
+}
+[data-theme="light"] .char-count {
+  color: var(--text-muted);
+}
+
+/* ================================================
+   NAVBAR ENHANCEMENTS
+   ================================================ */
+nav {
+  padding: 16px 60px;
+  gap: 16px;
+}
+.nav-logo-text {
+  font-size: 20px;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--gold), #f5d97a, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+nav.scrolled {
+  box-shadow: 0 4px 30px rgba(0,212,255,.1);
+}
+
+/* ================================================
+   ENHANCED HERO SECTION
+   ================================================ */
+#hero {
+  background: var(--hero-bg);
+}
+.hero-title {
+  text-shadow: 0 2px 40px rgba(0,0,0,.3);
+}
+
+/* ================================================
+   ENHANCED SCROLL REVEAL — staggered & smoother
+   ================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .75s cubic-bezier(.25,.46,.45,.94),
+              transform .75s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .12s; }
+.reveal-delay-2 { transition-delay: .24s; }
+.reveal-delay-3 { transition-delay: .36s; }
+.reveal-delay-4 { transition-delay: .48s; }
+
+/* ================================================
+   ENHANCED CARDS — glassmorphism & glow
+   ================================================ */
+.service-card,
+.srv-card {
+  backdrop-filter: blur(10px);
+}
+.service-card:hover,
+.srv-card:hover {
+  box-shadow: 0 20px 60px rgba(0,212,255,.12), 0 0 0 1px rgba(0,212,255,.15);
+}
+.blog-card:hover {
+  box-shadow: 0 20px 50px rgba(0,212,255,.1), 0 0 0 1px rgba(0,212,255,.12);
+}
+
+/* ================================================
+   ENHANCED BUTTONS
+   ================================================ */
+.btn-primary {
+  background: linear-gradient(135deg, var(--electric), #0099cc);
+  box-shadow: 0 0 20px rgba(0,212,255,.4), 0 4px 15px rgba(0,0,0,.2);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+  border-radius: inherit;
+}
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 50px rgba(0,212,255,.75), 0 8px 25px rgba(0,0,0,.25);
+}
+.btn-outline:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 35px rgba(0,212,255,.6);
+}
+
+/* ================================================
+   ENHANCED SOCIAL BUTTONS
+   ================================================ */
+.social-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  transition-duration: .2s;
+}
+
+/* ================================================
+   ENHANCED SECTION LABELS
+   ================================================ */
+.section-label {
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+}
+
+/* ================================================
+   FORM FIELD ICON COLOR — fix for light mode 
+   ================================================ */
+[data-theme="light"] .field-icon {
+  color: rgba(30,58,90,.5);
+}
+[data-theme="light"] .form-field input:focus,
+[data-theme="light"] .form-field textarea:focus {
+  background: rgba(0,136,187,.03);
+  border-color: var(--electric);
+  box-shadow: 0 0 0 1px rgba(0,136,187,.2), 0 0 16px rgba(0,136,187,.06);
+}
+
+/* ================================================
+   RESPONSIVE ENHANCEMENTS
+   ================================================ */
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex; }
+  #themeToggle { width: 38px; height: 38px; margin-right: 8px; }
+  .srv-grid { padding: 0 20px 60px; }
+  .iron-grid { padding: 0 4px; }
+  .hero-title { font-size: clamp(28px, 7vw, 52px); }
+  .counters { gap: 30px; }
+  .counter-num { font-size: 38px; }
+}
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-outline { width: 100%; max-width: 260px; text-align: center; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { text-align: center; }
+  .social-links { justify-content: center; }
+}
+
+/* ================================================
+   SCROLLBAR STYLING
+   ================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(0,212,255,.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0,212,255,.55); }
+
+/* ================================================
+   SELECTION COLOR
+   ================================================ */
+::selection {
+  background: rgba(0,212,255,.25);
+  color: var(--electric);
+}
+
+/* ================================================
+   FOCUS VISIBLE — ACCESSIBILITY
+   ================================================ */
+:focus-visible {
+  outline: 2px solid var(--electric);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================================================
+   HERO VIDEO ENHANCED
+   ================================================ */
+.hero-video-wrap {
+  box-shadow: 0 0 60px rgba(0,212,255,.2),
+              0 0 120px rgba(0,212,255,.08),
+              0 20px 40px rgba(0,0,0,.3);
+}
+.hero-video-wrap video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* ================================================
+   LOADING SKELETON — subtle pulse on cards
+   ================================================ */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* ================================================
+   SMOOTH PAGE SCROLL
+   ================================================ */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, html { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ================================================
+   ENHANCED GALLERY EXPAND
+   ================================================ */
+.galeria-expand img {
+  transition: all .65s cubic-bezier(.25,.46,.45,.94);
+}
+.galeria-expand img:hover {
+  filter: brightness(105%) saturate(1.4);
+}
+
+/* ================================================
+   ENHANCED ABOUT IMAGE GLOW
+   ================================================ */
+.about-img-inner {
+  box-shadow: 0 0 60px rgba(0,212,255,.12),
+              0 20px 50px rgba(0,0,0,.3);
+}
+
+/* ================================================
+   ENHANCED FOOTER
+   ================================================ */
+[data-theme="light"] footer {
+  background: var(--footer-bg);
+  border-top: 1px solid rgba(0,136,187,.1);
+}
+[data-theme="light"] .footer-top {
+  border-bottom-color: rgba(0,136,187,.1);
+}
+[data-theme="light"] .footer-col-title {
+  color: var(--electric);
+}
+[data-theme="light"] .footer-brand .big-name {
+  color: var(--electric);
+}
+[data-theme="light"] .bolivian-stripe div {
+  opacity: .9;
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================
+     CANVAS DE PARTÍCULAS
+     El canvas de fondo ocupa toda la pantalla fixed.
+     Las partículas y líneas de conexión se dibujan aquí
+     mediante JavaScript en cada frame de animación.
+     ================================================ -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ================================================
+     CAPA DE CIRCUITOS NEÓN
+     Contenedor fixed que aloja los SVGs de circuito
+     generados dinámicamente por JavaScript al cargar.
+     ================================================ -->
+<div id="neonCircuits"></div>
+
+<!-- ================================================
+     NAVBAR — BARRA DE NAVEGACIÓN FIJA
+     Al hacer click en cada link se abre la sección
+     SPA correspondiente (overlay de pantalla completa).
+     data-spa="nombre" indica qué overlay activar.
+     ================================================ -->
+<nav id="navbar">
+  <!-- Logo: ícono + texto EDUVEL.AI -->
+  <a href="#hero" class="nav-logo">
+    <img src="imagenesEDUVEL/Logo_Eduvel.png" alt="Eduvel.AI Logo" id="navLogoImg">
+    <span class="nav-logo-text">EDUVEL.AI</span>
+  </a>
+
+  <!-- Links del menú: cada uno abre su sección SPA al hacer clic -->
+  <ul class="nav-links">
+    <li><a href="#" onclick="document.querySelectorAll('.spa-page.active').forEach(p=>p.classList.remove('active'));document.body.style.overflow='';document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));setTimeout(()=>document.getElementById('hero').scrollIntoView({behavior:'smooth'}),50);return false;">INICIO</a></li>
+    <li><a href="#" data-spa="servicios" onclick="openSpa('servicios');return false;">SERVICIOS</a></li>
+    <li><a href="#" data-spa="blog"      onclick="openSpa('blog');     return false;">BLOG</a></li>
+    <li><a href="#" data-spa="contenido" onclick="openSpa('contenido');return false;">CONTENIDO</a></li>
+    <li><a href="#" data-spa="contacto"  onclick="openSpa('contacto'); return false;">CONTACTO</a></li>
+  </ul>
+
+  <!-- Botón de cambio de tema 🌙/☀️ -->
+  <button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
+    <span class="theme-icon theme-moon">🌙</span>
+    <span class="theme-icon theme-sun">☀️</span>
+  </button>
+
+  <!-- Menú hamburguesa (móvil) -->
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menú móvil overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="closeMobileMenu();document.querySelectorAll('.spa-page.active').forEach(p=>p.classList.remove('active'));document.body.style.overflow='';setTimeout(()=>document.getElementById('hero').scrollIntoView({behavior:'smooth'}),50);return false;">INICIO</a>
+  <a href="#" onclick="closeMobileMenu();openSpa('servicios');return false;">SERVICIOS</a>
+  <a href="#" onclick="closeMobileMenu();openSpa('blog');return false;">BLOG</a>
+  <a href="#" onclick="closeMobileMenu();openSpa('contenido');return false;">CONTENIDO</a>
+  <a href="#" onclick="closeMobileMenu();openSpa('contacto');return false;">CONTACTO</a>
+</div>
+
+<!-- ================================================
+     SECCIÓN SPA: INICIO
+     El link "INICIO" del navbar hace scroll al hero
+     principal de la página (section#hero), por lo que
+     este overlay ya no es necesario y fue eliminado.
+     El hero ES el inicio — no hay overlay separado.
+     ================================================ -->
+
+<!-- ================================================
+     SECCIÓN SPA: SERVICIOS
+     Se activa al hacer clic en "SERVICIOS" del navbar.
+     Muestra las 4 tarjetas de servicio en grilla 2×2.
+     ================================================ -->
+<div class="spa-page" id="spa-servicios">
+  <div class="spa-stripe"><div class="s-red"></div><div class="s-yellow"></div><div class="s-green"></div></div>
+
+  <div class="spa-header" style="background:linear-gradient(180deg,#1a0a00,#0a0e1a);border-bottom:1px solid rgba(255,100,0,.2);">
+    <button class="spa-close" onclick="closeSpa('servicios')" title="Cerrar" style="border-color:rgba(255,100,0,.4);color:#FF6A00;">✕</button>
+    <div class="section-label" style="border-color:rgba(255,100,0,.4);background:rgba(255,100,0,.08);color:#FF6A00;">⚡ STARK INDUSTRIES — SERVICIOS</div>
+    <h1 style="background:linear-gradient(135deg,#FF6A00,#FFD700,#FF6A00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Soluciones <span>Tecnológicas</span></h1>
+    <p style="color:rgba(255,180,100,.7);">Tecnología de nivel Stark para transformar tu empresa</p>
+  </div>
+
+  <div class="spa-body" style="background:linear-gradient(180deg,#0a0e1a,#120800);">
+
+    <!-- HUD decorativo superior -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px;padding:14px 20px;background:rgba(255,106,0,.05);border:1px solid rgba(255,106,0,.2);border-radius:12px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#FF6A00;box-shadow:0 0 10px #FF6A00;animation:ironPulse 1.5s ease-in-out infinite;"></div>
+      <span style="font-family:'Space Mono',monospace;font-size:12px;color:#FF6A00;letter-spacing:2px;">SISTEMA ACTIVO — 4 MÓDULOS DISPONIBLES</span>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,106,0,.4),transparent);"></div>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,180,100,.5);">EDUVEL.AI v2.0</span>
+    </div>
+
+    <div class="iron-grid">
+
+      <!-- Servicio 01 -->
+      <div class="iron-card">
+        <div class="iron-scan"></div>
+        <div class="iron-corner tl"></div>
+        <div class="iron-corner tr"></div>
+        <div class="iron-corner bl"></div>
+        <div class="iron-corner br"></div>
+        <div class="iron-hud">
+          <span>MOD_01</span>
+          <div class="iron-dot"></div>
+          <span style="color:rgba(255,180,100,.4);">ACTIVO</span>
+        </div>
+        <div class="iron-icon">🖼</div>
+        <div class="iron-title">Creación de Imágenes Digitales</div>
+        <div class="iron-line"></div>
+        <div class="iron-desc">Generamos imágenes impresionantes con inteligencia artificial. Desde fotos profesionales hasta ilustraciones únicas para tu marca. Calidad de estudio, velocidad de IA.</div>
+        <div class="iron-tags">
+          <span>IA Generativa</span>
+          <span>Branding</span>
+          <span>Alta Calidad</span>
+        </div>
+        <div class="iron-bar-wrap">
+          <div class="iron-bar-label">POTENCIA</div>
+          <div class="iron-bar-track"><div class="iron-bar-fill" style="width:92%"></div></div>
+          <span class="iron-bar-val">92%</span>
+        </div>
+        <div class="iron-btn">ACTIVAR MÓDULO →</div>
+        <div class="iron-particles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <!-- Servicio 02 -->
+      <div class="iron-card">
+        <div class="iron-scan"></div>
+        <div class="iron-corner tl"></div>
+        <div class="iron-corner tr"></div>
+        <div class="iron-corner bl"></div>
+        <div class="iron-corner br"></div>
+        <div class="iron-hud">
+          <span>MOD_02</span>
+          <div class="iron-dot"></div>
+          <span style="color:rgba(255,180,100,.4);">ACTIVO</span>
+        </div>
+        <div class="iron-icon">🎬</div>
+        <div class="iron-title">Edición de Videos Profesional</div>
+        <div class="iron-line"></div>
+        <div class="iron-desc">Transformamos tu contenido audiovisual con edición de alta calidad, efectos especiales y postproducción cinematográfica. Tu historia, contada magistralmente.</div>
+        <div class="iron-tags">
+          <span>Postproducción</span>
+          <span>Efectos</span>
+          <span>Cinematográfico</span>
+        </div>
+        <div class="iron-bar-wrap">
+          <div class="iron-bar-label">POTENCIA</div>
+          <div class="iron-bar-track"><div class="iron-bar-fill" style="width:88%"></div></div>
+          <span class="iron-bar-val">88%</span>
+        </div>
+        <div class="iron-btn">ACTIVAR MÓDULO →</div>
+        <div class="iron-particles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <!-- Servicio 03 -->
+      <div class="iron-card">
+        <div class="iron-scan"></div>
+        <div class="iron-corner tl"></div>
+        <div class="iron-corner tr"></div>
+        <div class="iron-corner bl"></div>
+        <div class="iron-corner br"></div>
+        <div class="iron-hud">
+          <span>MOD_03</span>
+          <div class="iron-dot"></div>
+          <span style="color:rgba(255,180,100,.4);">ACTIVO</span>
+        </div>
+        <div class="iron-icon">💻</div>
+        <div class="iron-title">Desarrollo de Páginas Web</div>
+        <div class="iron-line"></div>
+        <div class="iron-desc">Diseñamos y desarrollamos sitios web modernos, rápidos y optimizados para convertir visitantes en clientes. Performance y estética en equilibrio perfecto.</div>
+        <div class="iron-tags">
+          <span>React</span>
+          <span>SEO</span>
+          <span>Responsive</span>
+        </div>
+        <div class="iron-bar-wrap">
+          <div class="iron-bar-label">POTENCIA</div>
+          <div class="iron-bar-track"><div class="iron-bar-fill" style="width:95%"></div></div>
+          <span class="iron-bar-val">95%</span>
+        </div>
+        <div class="iron-btn">ACTIVAR MÓDULO →</div>
+        <div class="iron-particles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <!-- Servicio 04 -->
+      <div class="iron-card">
+        <div class="iron-scan"></div>
+        <div class="iron-corner tl"></div>
+        <div class="iron-corner tr"></div>
+        <div class="iron-corner bl"></div>
+        <div class="iron-corner br"></div>
+        <div class="iron-hud">
+          <span>MOD_04</span>
+          <div class="iron-dot"></div>
+          <span style="color:rgba(255,180,100,.4);">ACTIVO</span>
+        </div>
+        <div class="iron-icon">⚙️</div>
+        <div class="iron-title">Automatización de Negocios</div>
+        <div class="iron-line"></div>
+        <div class="iron-desc">Implementamos sistemas inteligentes que automatizan procesos, reducen costos y aumentan la productividad. Deja que la IA trabaje por ti.</div>
+        <div class="iron-tags">
+          <span>IA</span>
+          <span>Procesos</span>
+          <span>Eficiencia</span>
+        </div>
+        <div class="iron-bar-wrap">
+          <div class="iron-bar-label">POTENCIA</div>
+          <div class="iron-bar-track"><div class="iron-bar-fill" style="width:97%"></div></div>
+          <span class="iron-bar-val">97%</span>
+        </div>
+        <div class="iron-btn">ACTIVAR MÓDULO →</div>
+        <div class="iron-particles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ================================================
+     SECCIÓN SPA: BLOG
+     Se activa al hacer clic en "BLOG" del navbar.
+     Muestra 3 entradas de blog con imagen y resumen.
+     ================================================ -->
+<div class="spa-page" id="spa-blog">
+  <div class="spa-stripe"><div class="s-red"></div><div class="s-yellow"></div><div class="s-green"></div></div>
+
+  <div class="spa-header">
+    <button class="spa-close" onclick="closeSpa('blog')" title="Cerrar">✕</button>
+    <div class="section-label">✍️ BLOG</div>
+    <h1>Artículos & <span class="gold">Conocimiento</span></h1>
+    <p>Lo último en IA, tecnología andina y transformación digital</p>
+  </div>
+
+  <div class="spa-body">
+    <!-- Grilla de 3 tarjetas de blog -->
+    <div class="spa-blog-grid">
+
+      <!-- Entrada 1: IA en Bolivia -->
+      <div class="spa-blog-card">
+        <!-- 📷 IMAGEN: Unsplash | ID: photo-1677442135703 | Tema: Red neuronal / Inteligencia Artificial | Fuente: https://unsplash.com/photos/1677442135703 | Licencia: Unsplash Free (uso libre sin atribución) -->
+        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="Inteligencia artificial en Bolivia" loading="lazy">
+        <div class="spa-blog-body">
+          <span class="spa-blog-tag blue">INTELIGENCIA ARTIFICIAL</span>
+          <div class="spa-blog-title">Cómo la IA está transformando las empresas bolivianas en 2025</div>
+          <div class="spa-blog-excerpt">
+            Descubre los casos de éxito más sorprendentes de automatización con IA en pequeñas
+            y medianas empresas de La Paz y El Alto.
+          </div>
+          <div class="spa-blog-meta">
+            <span>15 Abr 2025</span>
+            <span style="color:var(--electric);font-weight:700;font-size:12px;">Leer más →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrada 2: Automatización -->
+      <div class="spa-blog-card">
+        <!-- 📷 IMAGEN: Unsplash | ID: photo-1485827404703 | Tema: Robot automatización industrial | Fuente: https://unsplash.com/photos/1485827404703 | Licencia: Unsplash Free -->
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="Automatización de negocios" loading="lazy">
+        <div class="spa-blog-body">
+          <span class="spa-blog-tag gold">AUTOMATIZACIÓN</span>
+          <div class="spa-blog-title">5 procesos que puedes automatizar hoy sin ser programador</div>
+          <div class="spa-blog-excerpt">
+            Herramientas de automatización accesibles para cualquier negocio,
+            para ahorrar tiempo y reducir errores sin conocimientos técnicos.
+          </div>
+          <div class="spa-blog-meta">
+            <span>02 Abr 2025</span>
+            <span style="color:var(--electric);font-weight:700;font-size:12px;">Leer más →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrada 3: Desarrollo Web -->
+      <div class="spa-blog-card">
+        <!-- 📷 IMAGEN: Unsplash | ID: photo-1498050108023 | Tema: Laptop programación / código | Fuente: https://unsplash.com/photos/1498050108023 | Licencia: Unsplash Free -->
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="Desarrollo web moderno" loading="lazy">
+        <div class="spa-blog-body">
+          <span class="spa-blog-tag green">DESARROLLO WEB</span>
+          <div class="spa-blog-title">Las tecnologías web que dominarán el mercado latinoamericano</div>
+          <div class="spa-blog-excerpt">
+            Análisis de tendencias en desarrollo web: desde React hasta WebAssembly,
+            y cómo aplicarlas para destacar en el mercado.
+          </div>
+          <div class="spa-blog-meta">
+            <span>20 Mar 2025</span>
+            <span style="color:var(--electric);font-weight:700;font-size:12px;">Leer más →</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /spa-blog-grid -->
+  </div><!-- /spa-body -->
+</div><!-- /spa-blog -->
+
+<!-- ================================================
+     SECCIÓN SPA: CONTENIDO
+     Se activa al hacer clic en "CONTENIDO" del navbar.
+     Muestra un video destacado + grilla de 3 videos.
+     ================================================ -->
+<div class="spa-page" id="spa-contenido">
+  <div class="spa-stripe"><div class="s-red"></div><div class="s-yellow"></div><div class="s-green"></div></div>
+
+  <div class="spa-header">
+    <button class="spa-close" onclick="closeSpa('contenido')" title="Cerrar">✕</button>
+    <div class="section-label blue">🎬 CONTENIDO</div>
+    <h1>Videos & <span class="gold">Tutoriales</span></h1>
+    <p>Aprende, inspírate y crece con nuestro contenido sobre IA y tecnología</p>
+  </div>
+
+  <div class="spa-body">
+    <!-- Video principal destacado -->
+    <div class="spa-video-featured" style="cursor:pointer;" onclick="window.open('https://youtu.be/5Izihr4BCbo','_blank')">
+  <img 
+    src="https://img.youtube.com/vi/5Izihr4BCbo/maxresdefault.jpg" 
+    alt="Video Destacado Eduvel.AI"
+    style="width:100%; display:block; aspect-ratio:16/9; object-fit:cover;">
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35); transition:background .3s;"
+    onmouseover="this.style.background='rgba(0,0,0,.5)'"
+    onmouseout="this.style.background='rgba(0,0,0,.35)'">
+    <div style="width:72px; height:72px; background:var(--electric); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px rgba(0,212,255,.6);">
+      <span style="font-size:28px; margin-left:6px;">▶</span>
+    </div>
+  </div>
+  <div class="spa-video-featured-label">▶ VIDEO DESTACADO — clic para ver en YouTube</div>
+</div>
+
+    <!-- Grilla de 3 videos adicionales -->
+    <div class="spa-videos-grid">
+
+     
+
+      <!-- Video 2: Automatización -->
+      <div class="spa-video-card">
+        <div class="spa-video-thumb">
+          <!-- 🎬 VIDEO: YouTube | ID: -CAL7DxKUy0 | Título: "Así es La Paz, ciudad maravilla de Bolivia" | URL: https://www.youtube.com/watch?v=-CAL7DxKUy0 -->
+          <iframe src="https://www.youtube.com/embed/-CAL7DxKUy0?rel=0&modestbranding=1"
+            title="Automatización con IA" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="spa-video-body">
+          <div class="spa-video-title">Automatiza tu negocio con IA en 3 pasos</div>
+          <div class="spa-video-desc">Guía práctica para automatización sin conocimientos técnicos avanzados.</div>
+          <div class="spa-video-meta">
+            <span>🕐 8:30 min</span>
+            <span style="color:var(--electric);font-weight:700">▶ Ver</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 3: Imágenes con IA -->
+      <div class="spa-video-card">
+        <div class="spa-video-thumb">
+          <!-- 🎬 VIDEO: YouTube | ID: t6X2XgCUpcE | Título: "Sobreviviendo La Ciudad Más Alta" | Canal: Real Stories en Español | URL: https://www.youtube.com/watch?v=t6X2XgCUpcE -->
+          <iframe src="https://www.youtube.com/embed/t6X2XgCUpcE?rel=0&modestbranding=1"
+            title="Imágenes con IA" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="spa-video-body">
+          <div class="spa-video-title">Crea imágenes profesionales con IA</div>
+          <div class="spa-video-desc">Genera imágenes de alta calidad para tu marca con herramientas de IA.</div>
+          <div class="spa-video-meta">
+            <span>🕐 15:20 min</span>
+            <span style="color:var(--electric);font-weight:700">▶ Ver</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /spa-videos-grid -->
+  </div><!-- /spa-body -->
+</div><!-- /spa-contenido -->
+
+<div class="spa-page" id="spa-contacto">
+  <div class="spa-stripe"><div class="s-red"></div><div class="s-yellow"></div><div class="s-green"></div></div>
+
+  <!-- Avioncitos animados -->
+  <div class="planes-container">
+    <div class="plane p1">✈️</div>
+    <div class="plane p2">✈️</div>
+    <div class="plane p3">✈️</div>
+  </div>
+
+  <div class="spa-header" style="background:linear-gradient(180deg,rgba(0,15,35,.95),rgba(10,14,26,.8));border-bottom:1px solid rgba(0,212,255,.15);">
+    <button class="spa-close" onclick="closeSpa('contacto')" title="Cerrar">✕</button>
+    <div class="section-label blue">📡 CONTACTO</div>
+    <h1>Conecta con <span class="gold">Nosotros</span></h1>
+    <p style="color:rgba(184,216,235,.7);">¿Listo para llevar tu negocio al siguiente nivel? Hablemos sobre cómo la IA puede transformarlo</p>
+  </div>
+
+  <div class="spa-body">
+    <div class="spa-contact-grid">
+
+      <!-- ── Columna izquierda ── -->
+      <div>
+
+        <!-- HUD decorativo -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;padding:10px 16px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:10px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#25D366;box-shadow:0 0 8px #25D366;animation:ironPulse 1.5s infinite;"></div>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(0,212,255,.6);letter-spacing:1.5px;">LÍNEAS DE CONTACTO ACTIVAS</span>
+        </div>
+
+        <div class="spa-contact-cards">
+
+          <!-- Ubicación → YouTube -->
+          <a href="https://youtube.com/@garvizusoto?si=Wx7wVC10thA4fnHL" target="_blank" style="text-decoration:none;">
+            <div class="spa-contact-card msg-card-blue" style="display:flex;align-items:center;gap:14px;position:relative;">
+              <div class="spa-cc-icon blue" style="animation:msgBounce 3s ease-in-out infinite;">📍</div>
+              <div style="flex:1;">
+                <div class="spa-cc-label">UBICACIÓN</div>
+                <div class="spa-cc-value" style="color:var(--electric);">La Paz, Bolivia</div>
+                <div style="font-size:12px;color:rgba(0,212,255,.5);margin-top:2px;">Altura: 3.600 m.s.n.m. ↗</div>
+              </div>
+              <span style="font-size:10px;color:rgba(0,212,255,.4);font-family:'Space Mono',monospace;">Ver canal →</span>
+            </div>
+          </a>
+
+          <!-- Email → mailto -->
+          <a href="mailto:aieduvel30@mail.com" style="text-decoration:none;">
+            <div class="spa-contact-card msg-card-red" style="display:flex;align-items:center;gap:14px;position:relative;">
+              <div class="spa-cc-icon gold" style="background:rgba(255,60,60,.1);border-color:rgba(255,60,60,.4);animation:msgBounce 3s ease-in-out .5s infinite;">✉️</div>
+              <div style="flex:1;">
+                <div class="spa-cc-label">EMAIL</div>
+                <div class="spa-cc-value" style="color:#ff6b6b;">aieduvel30@mail.com</div>
+                <div style="font-size:12px;color:rgba(255,80,80,.5);margin-top:2px;">ventas@eduvel.ai</div>
+              </div>
+              <span style="font-size:10px;color:rgba(255,80,80,.4);font-family:'Space Mono',monospace;">Escribir →</span>
+            </div>
+          </a>
+
+          <!-- WhatsApp → wa.me -->
+          <a href="https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20y%20c%C3%B3mo%20pueden%20ayudarme%20a%20crecer%20mi%20negocio." target="_blank" style="text-decoration:none;">
+            <div class="spa-contact-card msg-card-green" style="display:flex;align-items:center;gap:14px;position:relative;">
+              <div class="spa-cc-icon green" style="animation:msgBounce 3s ease-in-out 1s infinite;">📱</div>
+              <div style="flex:1;">
+                <div class="spa-cc-label">WHATSAPP / CELULAR</div>
+                <div class="spa-cc-value" style="color:#25D366;">+591 73284201</div>
+                <div style="font-size:12px;color:rgba(37,211,102,.5);margin-top:2px;">Lun–Vie 9:00–18:00</div>
+              </div>
+              <span style="font-size:10px;color:rgba(37,211,102,.4);font-family:'Space Mono',monospace;">Chatear →</span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="social-title" style="margin-top:28px;">SÍGUENOS</div>
+        <div class="social-links">
+          <a href="https://youtube.com/@garvizusoto?si=Wx7wVC10thA4fnHL" target="_blank" class="social-btn social-btn-yt" title="YouTube">▶ YT</a>
+          <a href="https://www.tiktok.com/@eduvel..ai?_r=1&_t=ZS-96DzLzjblto" target="_blank" class="social-btn social-btn-tt" title="TikTok">♪ TT</a>
+          <a href="https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20sus%20servicios." target="_blank" class="social-btn social-btn-wa" title="WhatsApp">💬 WA</a>
+        </div>
+
+      </div>
+
+      <!-- ── Columna derecha: formulario ── -->
+      <div class="msg-form-wrap" id="spaContactForm">
+
+        <!-- Burbuja de bienvenida -->
+        <div class="msg-welcome">
+          <div class="msg-avatar">🤖</div>
+          <div class="msg-bubble-in">
+            <p style="margin:0;font-size:14px;color:var(--white);">¡Hola! 👋 Cuéntanos sobre tu proyecto y te respondemos muy pronto.</p>
+            <span class="msg-bubble-time">Eduvel.AI — ahora</span>
+          </div>
+        </div>
+
+        <!-- Campo nombre -->
+        <div class="form-field">
+          <label>Nombre completo</label>
+          <div class="field-wrap">
+            <span class="field-icon">👤</span>
+            <input type="text" placeholder="Tu nombre" id="spa-fname">
+            <div class="field-line"></div>
+          </div>
+        </div>
+
+        <!-- Campo email -->
+        <div class="form-field">
+          <label>Correo electrónico</label>
+          <div class="field-wrap">
+            <span class="field-icon">✉️</span>
+            <input type="email" placeholder="tu@email.com" id="spa-femail">
+            <div class="field-line"></div>
+          </div>
+        </div>
+
+        <!-- Campo mensaje -->
+        <div class="form-field">
+          <label>Mensaje</label>
+          <div class="field-wrap">
+            <span class="field-icon" style="top:14px;align-self:flex-start;">💬</span>
+            <textarea placeholder="Cuéntanos sobre tu proyecto..." id="spa-fmessage" maxlength="500"
+              oninput="document.getElementById('spaCharCount').textContent=this.value.length+'/500'">
+            </textarea>
+            <div class="field-line"></div>
+          </div>
+          <div class="char-count" id="spaCharCount">0/500</div>
+        </div>
+
+        <!-- Botón enviar -->
+        <button class="btn-send-plane" onclick="handleSpaSubmit()">
+          <span>ENVIAR MENSAJE</span>
+          <span class="plane-icon">✈️</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================
+     HERO — SECCIÓN PRINCIPAL DE LA LANDING PAGE
+     Primera sección visible al cargar el sitio.
+     ================================================ -->
+<section id="hero">
+  <!-- Líneas horizontales de circuito animadas que cruzan el fondo del hero -->
+  <div class="circuit-lines">
+    <div class="circuit-line" style="top:18%;width:280px;animation-duration:8s"></div>
+    <div class="circuit-line" style="top:42%;width:220px;animation-duration:11s;animation-delay:2s"></div>
+    <div class="circuit-line" style="top:67%;width:350px;animation-duration:7s;animation-delay:1s"></div>
+  </div>
+
+  <!-- Silueta de montañas andinas en el fondo inferior izquierdo -->
+  <svg class="mountains" viewBox="0 0 900 320" fill="none">
+    <path d="M0 320 L130 130 L240 210 L370 55 L480 165 L590 75 L700 155 L830 70 L900 90 L900 320Z"
+      fill="rgba(212,175,55,0.04)" stroke="#D4AF37" stroke-width="1.2"/>
+  </svg>
+
+  <!-- Teleférico de La Paz animado en la esquina superior derecha -->
+  <div class="cablecar">
+    <div class="cablecar-line"></div>
+    <div class="cablecar-body"></div>
+  </div>
+
+  <!-- Logo hero con anillos giratorios y efectos de luz -->
+  <!-- margin-top aumentado en CSS para que el logo aparezca más abajo -->
+  <div class="hero-logo-wrap" id="heroLogo">
+    <div class="logo-glow"></div>      <!-- Halo de brillo pulsante -->
+    <div class="logo-ring"></div>      <!-- Anillo exterior giratorio -->
+    <div class="logo-ring r2"></div>   <!-- Anillo punteado dorado (gira al revés) -->
+    <div class="scanline"></div>       <!-- Línea de escaneo vertical -->
+    <!-- Chispas decorativas en las esquinas del logo -->
+    <div class="spark" style="top:-6px;left:25px;animation-delay:.3s"></div>
+    <div class="spark" style="top:15px;right:-8px;animation-delay:.9s"></div>
+    <div class="spark" style="bottom:5px;left:-8px;animation-delay:1.6s"></div>
+    <div class="spark" style="bottom:20px;right:5px;animation-delay:2.2s"></div>
+    <!-- Imagen del logo principal de Eduvel.AI -->
+    <img class="hero-logo-img" id="logoImg" src="imagenesEDUVEL/Logo_Eduvel.png" alt="Eduvel.AI">
+  </div>
+
+ <!-- Video propio debajo del logo -->
+<div class="hero-video-wrap reveal" style="margin-top:32px">
+  <video
+    src="IMAGENESEDUVEL/VIDEOeduvel.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    style="width:100%; display:block; object-fit:cover;"></video>
+  </video>
+</div>
+  <!-- Título principal del hero -->
+  <h1 class="hero-title" style="margin-top:40px">
+    <span class="line1">TECNOLOGÍA A</span>
+    <span class="line2">3600 METROS DE ALTURA</span>
+  </h1>
+
+  <!-- Subtítulo descriptivo -->
+  <p class="hero-sub">Llevando la Inteligencia Artificial al siguiente nivel desde Bolivia</p>
+
+  <!-- Tres puntos con los colores de la bandera boliviana -->
+  <div class="bolivian-dots"><span></span><span></span><span></span></div>
+
+  <!-- Botones CTA: scroll a servicios o contacto -->
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">SERVICIOS</button>
+    <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">CONTACTO</button>
+  </div>
+
+  <!-- Indicador de scroll (puntico que rebota hacia abajo) -->
+  <div class="scroll-indicator">
+    <div class="scroll-circle"><div class="scroll-dot"></div></div>
+  </div>
+</section>
+
+<!-- ================================================
+     ABOUT — "QUIÉNES SOMOS"
+     Sección con texto descriptivo de la empresa
+     y foto de La Paz Bolivia de noche.
+     ================================================ -->
+<section id="about">
+  <div class="about-grid">
+    <!-- Columna izquierda: texto y contadores -->
+    <div class="about-text reveal">
+      <div class="section-label">🏔 QUIÉNES SOMOS</div>
+      <h2><span class="andina">Innovación Andina</span> Digital</h2>
+      <p>En <strong>Eduvel.AI</strong> fusionamos la riqueza cultural boliviana con la vanguardia tecnológica. Somos un equipo de innovadores apasionados por transformar ideas en soluciones digitales de clase mundial.</p>
+      <p>Ubicados en <strong>La Paz, a 3.600 metros de altura</strong>, llevamos la inteligencia artificial, la automatización y la creación digital a empresas de toda América Latina.</p>
+      <p>Nuestra misión es democratizar el acceso a herramientas de IA y automatización para negocios de todos los tamaños, impulsando el crecimiento económico de Bolivia y la región.</p>
+
+      <!-- Contadores animados que se incrementan al entrar en el viewport -->
+      <div class="counters">
+        <div class="counter-item reveal reveal-delay-2" style="text-align:center">
+          <div class="counter-icon">🏗</div>
+          <div class="counter-num" data-target="500">0</div>
+          <div class="counter-label">PROYECTOS COMPLETADOS</div>
+        </div>
+        <div class="counter-item reveal reveal-delay-3" style="text-align:center">
+          <div class="counter-icon">🏢</div>
+          <div class="counter-num" data-target="50">0</div>
+          <div class="counter-label">EMPRESAS TRANSFORMADAS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha: foto de La Paz de noche con overlays -->
+    <div class="about-image-wrap reveal reveal-delay-2">
+      <div class="about-img-inner">
+        <!-- Imagen de La Paz Bolivia de noche con el teleférico -->
+        <!-- 📷 IMAGEN: Unsplash | ID: photo-1580234831432 | Tema: La Paz Bolivia con teleférico | Fuente: https://unsplash.com/photos/1580234831432 | Licencia: Unsplash Free -->
+        <img src="IMAGENESEDUVEL/LAPAZ.jpg"
+          alt="La Paz Bolivia de noche" loading="lazy">
+        <!-- Línea de escaneo animada sobre la foto -->
+        <div class="scan-overlay"></div>
+        <!-- Badge de ubicación flotante -->
+        <div class="location-badge">📍 LA PAZ, BOLIVIA</div>
+        <!-- Leyenda en el borde inferior de la foto -->
+        <div class="img-caption">
+          <div class="cap-title">Ciudad más alta del mundo</div>
+          <div class="cap-sub">Tecnología con altura andina</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     EXTRA IMAGES — "NUESTRA ESENCIA"
+     Tres imágenes temáticas: IA / Illimani / Código
+     ================================================ -->
+<section id="extra-images">
+  <div style="text-align:center;margin-bottom:40px;" class="reveal">
+    <div class="section-label blue">🖼 NUESTRA ESENCIA</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,40px);">
+      Visión, <span style="color:var(--gold)">Cultura</span> & Tecnología
+    </h2>
+  </div>
+  <div class="extra-images-grid">
+    <!-- Imagen 1: Red neuronal / Inteligencia Artificial -->
+    <div class="extra-img-card reveal reveal-delay-1">
+      <!-- 📷 IMAGEN: Unsplash | ID: photo-1677442135703 | Tema: Inteligencia Artificial - red neuronal | Fuente: https://unsplash.com/photos/1677442135703 | Licencia: Unsplash Free -->
+      <img src="imagenesEDUVEL/IA.jpg"
+        alt="Inteligencia artificial red neuronal" loading="lazy">
+      <div class="eic-label">✦ INTELIGENCIA ARTIFICIAL</div>
+    </div>
+    <!-- Imagen 2: Montaña Illimani, símbolo de Bolivia -->
+    <div class="extra-img-card reveal reveal-delay-2">
+      <!-- 📷 IMAGEN: Unsplash | ID: photo-1464822759023 | Tema: Montaña nevada Illimani Bolivia | Fuente: https://unsplash.com/photos/1464822759023 | Licencia: Unsplash Free -->
+      <img src="imagenesEDUVEL/illimani-02.jpg"
+        alt="Montaña nevada Illimani Bolivia" loading="lazy">
+      <div class="eic-label">✦ ILLIMANI — SÍMBOLO DE BOLIVIA</div>
+    </div>
+    <!-- Imagen 3: Programador trabajando con código -->
+    <div class="extra-img-card reveal reveal-delay-3">
+      <!-- 📷 IMAGEN: Unsplash | ID: photo-1498050108023 | Tema: Programador desarrollando código | Fuente: https://unsplash.com/photos/1498050108023 | Licencia: Unsplash Free -->
+      <img src="imagenesEDUVEL/Visual.jpeg"
+        alt="Programador desarrollando software" loading="lazy">
+      <div class="eic-label">✦ DESARROLLO & CÓDIGO</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SERVICES — "SERVICIOS" (en el scroll principal)
+     Cuatro tarjetas de servicio con efecto hover.
+     ================================================ -->
+<section id="services">
+  <div class="services-header reveal">
+    <div class="section-label red">⚡ SERVICIOS</div>
+    <h2>Soluciones <span class="gold">Tecnológicas</span> Inteligentes</h2>
+    <p>Todo lo que tu empresa necesita para crecer en la era digital</p>
+    <div class="circuit-deco">
+      <div class="line"></div>
+      <div class="dot"></div><div class="dot" style="opacity:.4"></div><div class="dot"></div>
+      <div class="line rev"></div>
+    </div>
+  </div>
+
+  <div class="srv-grid">
+
+    <div class="srv-card reveal reveal-delay-1">
+      <div class="srv-line"></div>
+      <div class="srv-num">01</div>
+      <div class="srv-icon-wrap blue">🖼</div>
+      <p class="srv-title">Creación de Imágenes Digitales</p>
+      <p class="srv-desc">Generamos imágenes impresionantes con inteligencia artificial. Desde fotos profesionales hasta ilustraciones únicas para tu marca.</p>
+      <div class="srv-tags">
+        <span class="srv-tag">IA Generativa</span>
+        <span class="srv-tag">Branding</span>
+        <span class="srv-tag">Alta Calidad</span>
+      </div>
+      <span class="srv-more">Ver más →</span>
+    </div>
+
+    <div class="srv-card reveal reveal-delay-2">
+      <div class="srv-line"></div>
+      <div class="srv-num">02</div>
+      <div class="srv-icon-wrap gold">🎬</div>
+      <p class="srv-title">Edición de Videos Profesional</p>
+      <p class="srv-desc">Transformamos tu contenido audiovisual con edición de alta calidad, efectos especiales y postproducción cinematográfica.</p>
+      <div class="srv-tags">
+        <span class="srv-tag">Postproducción</span>
+        <span class="srv-tag">Efectos</span>
+        <span class="srv-tag">Cinematográfico</span>
+      </div>
+      <span class="srv-more">Ver más →</span>
+    </div>
+
+    <div class="srv-card reveal reveal-delay-3">
+      <div class="srv-line"></div>
+      <div class="srv-num">03</div>
+      <div class="srv-icon-wrap green">💻</div>
+      <p class="srv-title">Desarrollo de Páginas Web</p>
+      <p class="srv-desc">Diseñamos y desarrollamos sitios web modernos, rápidos y optimizados para convertir visitantes en clientes.</p>
+      <div class="srv-tags">
+        <span class="srv-tag">React</span>
+        <span class="srv-tag">SEO</span>
+        <span class="srv-tag">Responsive</span>
+      </div>
+      <span class="srv-more">Ver más →</span>
+    </div>
+
+    <div class="srv-card reveal reveal-delay-4">
+      <div class="srv-line"></div>
+      <div class="srv-num">04</div>
+      <div class="srv-icon-wrap red">⚙️</div>
+      <p class="srv-title">Automatización de Negocios</p>
+      <p class="srv-desc">Implementamos sistemas inteligentes que automatizan procesos, reducen costos y aumentan la productividad de tu empresa.</p>
+      <div class="srv-tags">
+        <span class="srv-tag">IA</span>
+        <span class="srv-tag">Procesos</span>
+        <span class="srv-tag">Eficiencia</span>
+      </div>
+      <span class="srv-more">Ver más →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     GALLERY — "GALERÍA"
+     Grilla asimétrica de fotos de La Paz y tecnología.
+     Con formas orgánicas y efecto zoom al hover.
+     ================================================ -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-label blue">📷 GALERÍA</div>
+    <h2>Nuestra Visión <span class="gold">Tecnológica</span></h2>
+    <p>Un vistazo a nuestra ciudad, nuestra tecnología y nuestro futuro compartido</p>
+  </div>
+
+  <div class="galeria-expand reveal">
+    <img src="IMAGENESEDUVEL/EDUARDO.jpg" alt="Desarrolladores Bolivianos" title="Desarrolladores Bolivianos">
+    <img src="IMAGENESEDUVEL/SOFTWARE-BOLIVIA.jpg" alt="Software Boliviano" title="Software Bolivianos">
+    <img src="IMAGENESEDUVEL/DISEÑADORA.png" alt="IA aliada del Diseño" title="IA Aliada del Diseño">
+    <img src="IMAGENESEDUVEL/Visual.jpeg" alt="Codificación Limpia" title="Una Codificación Limpia">
+    <img src="IMAGENESEDUVEL/CASCO.jpg" alt="Automatización IA" title="Automatización & IA">
+    <img src="IMAGENESEDUVEL/CONFE.jpg" alt="Conferencias" title="Conferencias con Programadores">
+  </div>
+</section>
+  
+
+
+<section id="contact">
+  <div class="contact-header reveal">
+    <div class="section-label blue">📡 CONTACTO</div>
+    <h2>Conecta con <span class="gold">Nosotros</span></h2>
+    <p>¿Listo para llevar tu negocio al siguiente nivel? Hablemos sobre cómo la IA puede transformarlo</p>
+  </div>
+
+  <!-- Avioncitos decorativos animados -->
+  <div class="planes-container">
+    <div class="plane p1">✈️</div>
+    <div class="plane p2">✈️</div>
+    <div class="plane p3">✈️</div>
+    <div class="plane p4">✈️</div>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Columna izquierda -->
+    <div class="reveal reveal-delay-1">
+      <div class="contact-cards">
+
+        <!-- Ubicación → YouTube -->
+        <a href="https://youtube.com/@garvizusoto?si=Wx7wVC10thA4fnHL" target="_blank" style="text-decoration:none;">
+          <div class="contact-card msg-card-blue">
+            <div class="msg-bubble-icon">📍</div>
+            <div>
+              <div class="cc-label">UBICACIÓN</div>
+              <div class="cc-value">La Paz, Bolivia</div>
+              <div style="font-size:12px;color:rgba(0,212,255,.6);margin-top:2px">Altura: 3.600 m.s.n.m. ↗</div>
+            </div>
+            <div class="msg-time">Ver canal →</div>
+          </div>
+        </a>
+
+        <!-- Email → mailto -->
+        <a href="mailto:aieduvel30@mail.com" style="text-decoration:none;">
+          <div class="contact-card msg-card-red">
+            <div class="msg-bubble-icon">✉️</div>
+            <div>
+              <div class="cc-label">EMAIL</div>
+              <div class="cc-value">aieduvel30@mail.com</div>
+              <div style="font-size:12px;color:rgba(255,80,80,.6);margin-top:2px">ventas@eduvel.ai</div>
+            </div>
+            <div class="msg-time">Escribir →</div>
+          </div>
+        </a>
+
+        <!-- WhatsApp → wa.me -->
+        <a href="https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20y%20c%C3%B3mo%20pueden%20ayudarme%20a%20crecer%20mi%20negocio." target="_blank" style="text-decoration:none;">
+          <div class="contact-card msg-card-green">
+            <div class="msg-bubble-icon">📱</div>
+            <div>
+              <div class="cc-label">WHATSAPP / CELULAR</div>
+              <div class="cc-value">+591 73284201</div>
+              <div style="font-size:12px;color:rgba(37,211,102,.6);margin-top:2px">Lun–Vie 9:00–18:00</div>
+            </div>
+            <div class="msg-time">Chatear →</div>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="social-title">SÍGUENOS</div>
+      <div class="social-links">
+        <a href="https://youtube.com/@garvizusoto?si=Wx7wVC10thA4fnHL" target="_blank" class="social-btn social-btn-yt" title="YouTube">▶ YT</a>
+        <a href="https://www.tiktok.com/@eduvel..ai?_r=1&_t=ZS-96DzLzjblto" target="_blank" class="social-btn social-btn-tt" title="TikTok">♪ TT</a>
+        <a href="https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20sus%20servicios." target="_blank" class="social-btn social-btn-wa" title="WhatsApp">💬 WA</a>
+      </div>
+    </div>
+
+    <!-- Columna derecha: formulario estilo mensajería -->
+    <div class="msg-form-wrap reveal reveal-delay-2" id="contactForm">
+
+      <!-- Burbuja de bienvenida -->
+      <div class="msg-welcome">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-bubble-in">
+          <p style="margin:0;font-size:14px;">¡Hola! 👋 Cuéntanos sobre tu proyecto y te respondemos pronto.</p>
+          <span class="msg-bubble-time">Eduvel.AI</span>
+        </div>
+      </div>
+
+      <!-- Campos del formulario -->
+      <div class="form-field">
+        <label>Nombre completo</label>
+        <div class="field-wrap">
+          <span class="field-icon">👤</span>
+          <input type="text" placeholder="Tu nombre" id="fname">
+          <div class="field-line"></div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Correo electrónico</label>
+        <div class="field-wrap">
+          <span class="field-icon">✉️</span>
+          <input type="email" placeholder="tu@email.com" id="femail">
+          <div class="field-line"></div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Mensaje</label>
+        <div class="field-wrap">
+          <span class="field-icon" style="top:14px;align-self:flex-start">💬</span>
+          <textarea placeholder="Cuéntanos sobre tu proyecto..." id="fmessage" maxlength="500"
+            oninput="document.getElementById('charCount').textContent=this.value.length+'/500'"></textarea>
+          <div class="field-line"></div>
+        </div>
+        <div class="char-count" id="charCount">0/500</div>
+      </div>
+
+      <!-- Botón enviar con avioncito -->
+      <button class="btn-send-plane" onclick="handleSubmit()">
+        <span>ENVIAR MENSAJE</span>
+        <span class="plane-icon">✈️</span>
+      </button>
+
+    </div>
+  </div>
+</section>
+<!-- ================================================
+     BLOG (en el scroll principal)
+     Tres tarjetas de artículos con imagen y resumen.
+     ================================================ -->
+<section id="blog">
+  <div class="blog-header reveal">
+    <div class="section-label">✍️ BLOG</div>
+    <h2>Artículos & <span class="gold">Conocimiento</span></h2>
+    <p>Lo último en IA, tecnología andina y transformación digital</p>
+  </div>
+  <div class="blog-grid">
+
+    <!-- Artículo 1: IA en empresas bolivianas -->
+    <div class="blog-card reveal reveal-delay-1">
+      <!-- 📷 IMAGEN BLOG 1: Unsplash | ID: photo-1677442135703 | IA / red neuronal | Fuente: https://unsplash.com/photos/1677442135703 | Licencia: Unsplash Free -->
+      <img class="blog-card-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="Inteligencia artificial en Bolivia" loading="lazy">
+      <div class="blog-card-body">
+        <span class="blog-tag blue">INTELIGENCIA ARTIFICIAL</span>
+        <div class="blog-card-title">Cómo la IA está transformando las empresas bolivianas en 2025</div>
+        <div class="blog-card-excerpt">Descubre los casos de éxito más sorprendentes de automatización con IA en pequeñas y medianas empresas de La Paz y El Alto.</div>
+        <div class="blog-card-meta">
+          <span>15 Abr 2025</span>
+          <span class="blog-card-read">Leer más →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artículo 2: Procesos de automatización -->
+    <div class="blog-card reveal reveal-delay-2">
+      <!-- 📷 IMAGEN BLOG 2: Unsplash | ID: photo-1485827404703 | Robot automatización | Fuente: https://unsplash.com/photos/1485827404703 | Licencia: Unsplash Free -->
+      <img class="blog-card-img" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="Automatización de negocios con robots" loading="lazy">
+      <div class="blog-card-body">
+        <span class="blog-tag gold">AUTOMATIZACIÓN</span>
+        <div class="blog-card-title">5 procesos que puedes automatizar hoy mismo sin ser programador</div>
+        <div class="blog-card-excerpt">Herramientas de automatización accesibles que cualquier negocio puede implementar para ahorrar tiempo y reducir errores.</div>
+        <div class="blog-card-meta">
+          <span>02 Abr 2025</span>
+          <span class="blog-card-read">Leer más →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artículo 3: Tendencias en desarrollo web -->
+    <div class="blog-card reveal reveal-delay-3">
+      <!-- 📷 IMAGEN BLOG 3: Unsplash | ID: photo-1498050108023 | Desarrollo web moderno | Fuente: https://unsplash.com/photos/1498050108023 | Licencia: Unsplash Free -->
+      <img class="blog-card-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="Desarrollo web moderno programación" loading="lazy">
+      <div class="blog-card-body">
+        <span class="blog-tag green">DESARROLLO WEB</span>
+        <div class="blog-card-title">Las tecnologías web que dominarán el mercado latinoamericano</div>
+        <div class="blog-card-excerpt">Un análisis profundo de las tendencias en desarrollo web, desde React hasta WebAssembly, y cómo aplicarlas en tu negocio.</div>
+        <div class="blog-card-meta">
+          <span>20 Mar 2025</span>
+          <span class="blog-card-read">Leer más →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     CONTENIDO — VIDEOS Y TUTORIALES (scroll principal)
+     Video destacado + grilla de 3 videos adicionales.
+     ================================================ -->
+<section id="contenido">
+  <div class="contenido-header reveal">
+    <div class="section-label blue">🎬 CONTENIDO</div>
+    <h2>Videos & <span class="gold">Tutoriales</span></h2>
+    <p>Aprende, inspírate y crece con nuestro contenido audiovisual sobre IA y tecnología</p>
+  </div>
+
+  <!-- Video principal / destacado de la sección -->
+<div class="video-featured-wrap reveal" style="position:relative; cursor:pointer;" onclick="window.open('https://youtu.be/5Izihr4BCbo','_blank')">
+  <img 
+    src="https://img.youtube.com/vi/5Izihr4BCbo/maxresdefault.jpg" 
+    alt="Video Destacado Eduvel.AI"
+    style="width:100%; display:block; aspect-ratio:16/9; object-fit:cover;">
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35); transition:background .3s;"
+    onmouseover="this.style.background='rgba(0,0,0,.5)'"
+    onmouseout="this.style.background='rgba(0,0,0,.35)'">
+    <div style="width:72px; height:72px; background:var(--electric); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px rgba(0,212,255,.6);">
+      <span style="font-size:28px; margin-left:6px;">▶</span>
+    </div>
+  </div>
+  <div class="video-featured-label">▶ VIDEO DESTACADO — clic para ver en YouTube</div>
+</div>
+
+  <!-- Grid de 3 videos secundarios -->
+  <div class="videos-grid">
+
+    <!-- Video 1 -->
+    <div class="video-card reveal reveal-delay-1">
+      <div class="video-thumb-wrap">
+        <!-- 🎬 VIDEO GRID 1: YouTube | ID: V1ey32FuoTc | "Ciudad de La Paz Bolivia 2020" | URL: https://www.youtube.com/watch?v=V1ey32FuoTc -->
+        <iframe src="https://www.youtube.com/embed/YZzB1Uca7n0?rel=0&modestbranding=1"
+          title="Introducción a la IA" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card-body">
+        <div class="video-card-title">APRENDISAJE CON IA</div>
+        <div class="video-card-desc">Aprende los fundamentos de la IA, cómo aprenden las máquinas y por qué está revolucionando la educación y los negocios en todo el mundo.</div>
+        <div class="video-card-meta">
+          <span>🕐 12:45 min</span>
+          <span style="color:var(--electric);font-weight:700">▶ Ver</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="video-card reveal reveal-delay-2">
+      <div class="video-thumb-wrap">
+        <!-- 🎬 VIDEO GRID 2: YouTube | ID: -CAL7DxKUy0 | "Así es La Paz, ciudad maravilla" | URL: https://www.youtube.com/watch?v=-CAL7DxKUy0 -->
+        <iframe src="https://www.youtube.com/embed/-CAL7DxKUy0?rel=0&modestbranding=1"
+          title="Automatización con IA" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card-body">
+        <div class="video-card-title">Automatiza tu negocio con IA en 3 pasos</div>
+        <div class="video-card-desc">Guía práctica para implementar automatización inteligente sin conocimientos técnicos avanzados.</div>
+        <div class="video-card-meta">
+          <span>🕐 8:30 min</span>
+          <span style="color:var(--electric);font-weight:700">▶ Ver</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video 3 -->
+    <div class="video-card reveal reveal-delay-3">
+      <div class="video-thumb-wrap">
+        <!-- 🎬 VIDEO GRID 3: YouTube | ID: t6X2XgCUpcE | "Sobreviviendo La Ciudad Más Alta" | Canal: Real Stories ES | URL: https://www.youtube.com/watch?v=t6X2XgCUpcE -->
+        <iframe src="https://www.youtube.com/embed/t6X2XgCUpcE?rel=0&modestbranding=1"
+          title="Imágenes con IA" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card-body">
+        <div class="video-card-title">Crea imágenes profesionales con IA</div>
+        <div class="video-card-desc">Aprende a generar imágenes de alta calidad para tu marca usando las últimas herramientas de inteligencia artificial.</div>
+        <div class="video-card-meta">
+          <span>🕐 15:20 min</span>
+          <span style="color:var(--electric);font-weight:700">▶ Ver</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     FOOTER — PIE DE PÁGINA
+     Cuatro columnas de links + branding + redes.
+     Termina con la franja tricolor boliviana.
+     ================================================ -->
+<footer>
+  <!-- Grilla de links del footer -->
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-title">SERVICIOS</div>
+      <a href="#">Imágenes con IA</a>
+      <a href="#">Edición de Video</a>
+      <a href="#">Desarrollo Web</a>
+      <a href="#">Automatización</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">EMPRESA</div>
+      <a href="#">Nosotros</a>
+      <a href="#">Equipo</a>
+      <a href="#">Valores</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">RECURSOS</div>
+      <a href="#">Blog</a>
+      <a href="#">Casos de Éxito</a>
+      <a href="#">FAQ</a>
+      <a href="#">Soporte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">LEGAL</div>
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+
+  <!-- Parte inferior: branding grande + derechos + redes -->
+  <div class="footer-bottom">
+    <div class="footer-brand">
+      <div class="big-name">EDUVEL<span class="ai">.AI</span></div>
+      <p>Tecnología Andina a 3600m de altura</p>
+    </div>
+    <div class="footer-right">
+      <p>© 2025 Eduvel.AI — La Paz, Bolivia</p>
+      <div class="social-links" style="justify-content:flex-end">
+        <a href="https://youtube.com/@garvizusoto?si=Wx7wVC10thA4fnHL" target="_blank" class="social-btn social-btn-yt" title="YouTube">▶</a>
+        <a href="https://www.tiktok.com/@eduvel..ai?_r=1&_t=ZS-96DzLzjblto" target="_blank" class="social-btn social-btn-tt" title="TikTok">♪</a>
+        <a href="https://wa.me/59173284201" target="_blank" class="social-btn social-btn-wa" title="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Franja de colores de la bandera boliviana al final de la página -->
+<div class="bolivian-stripe">
+  <div class="s-red"></div>
+  <div class="s-yellow"></div>
+  <div class="s-green"></div>
+</div>
+
+<!-- ================================================
+     GATITO MASCOTA IA — ESQUINA INFERIOR DERECHA
+     SVG de gatito animado con nubecita de mensajes.
+     Muestra mensajes automáticos cada 8–15 segundos.
+     Al hacer clic muestra el siguiente mensaje.
+     Los ojos siguen al cursor del mouse (moveCatEyes).
+     ================================================ -->
+<div id="cat-wrap">
+  <!-- Botón pequeño de WhatsApp bajo el gatito -->
+  <div class="cat-btn" onclick="openWhatsApp()" title="WhatsApp">
+    <!-- Ícono oficial de WhatsApp en SVG -->
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="#25D366">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+
+  <!-- Nubecita de mensajes del gatito (visible/oculta con clase CSS) -->
+  <div id="catBubble" class="cat-bubble">
+    <span class="cloud-icon">☁️</span>
+    <span id="catBubbleText">¡Miau! 🐱</span>
+  </div>
+
+  <!-- SVG del gatito mascota animado — dibujado a mano en SVG -->
+  <svg id="cat-svg" width="72" height="72" viewBox="0 0 80 80" onclick="catClick()">
+    <!-- Cuerpo principal del gato (elipse azul oscuro) -->
+    <ellipse cx="40" cy="52" rx="22" ry="18" fill="#1a2a4a" stroke="#00D4FF" stroke-width="1.5"/>
+    <!-- Cabeza del gato (elipse más pequeña arriba) -->
+    <ellipse cx="40" cy="30" rx="18" ry="16" fill="#1a2a4a" stroke="#00D4FF" stroke-width="1.5"/>
+    <!-- Oreja izquierda (triángulo apuntando hacia arriba) -->
+    <polygon points="24,18 20,6 30,14" fill="#0d1f3a" stroke="#00D4FF" stroke-width="1.2" id="catEarL"/>
+    <!-- Interior rosado de la oreja izquierda -->
+    <polygon points="24,16 22,9 28,14" fill="rgba(255,100,150,0.4)"/>
+    <!-- Oreja derecha -->
+    <polygon points="56,18 60,6 50,14" fill="#0d1f3a" stroke="#00D4FF" stroke-width="1.2" id="catEarR"/>
+    <!-- Interior rosado de la oreja derecha -->
+    <polygon points="56,16 58,9 52,14" fill="rgba(255,100,150,0.4)"/>
+    <!-- Fondo oscuro del ojo izquierdo -->
+    <ellipse cx="32" cy="28" rx="5" ry="5" fill="#002030"/>
+    <!-- Fondo oscuro del ojo derecho -->
+    <ellipse cx="48" cy="28" rx="5" ry="5" fill="#002030"/>
+    <!-- Pupila neón del ojo izquierdo (se mueve con el cursor) -->
+    <ellipse cx="32" cy="28" rx="3" ry="3.5" fill="#00D4FF" id="catEyeL" opacity=".9"/>
+    <!-- Pupila neón del ojo derecho (se mueve con el cursor) -->
+    <ellipse cx="48" cy="28" rx="3" ry="3.5" fill="#00D4FF" id="catEyeR" opacity=".9"/>
+    <!-- Brillito blanco en el ojo izquierdo -->
+    <circle cx="33" cy="27" r="1" fill="white" opacity=".85"/>
+    <!-- Brillito blanco en el ojo derecho -->
+    <circle cx="49" cy="27" r="1" fill="white" opacity=".85"/>
+    <!-- Nariz triangular rosada -->
+    <polygon points="40,34 37,32 43,32" fill="rgba(255,150,180,0.9)"/>
+    <!-- Boca en forma de W (sonrisa) -->
+    <path d="M37 35 Q40 38 43 35" stroke="#00D4FF" stroke-width="1.2" fill="none"/>
+    <!-- Bigotes del lado izquierdo -->
+    <line x1="20" y1="32" x2="34" y2="33" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+    <line x1="19" y1="35" x2="33" y2="34" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+    <!-- Bigotes del lado derecho -->
+    <line x1="60" y1="32" x2="46" y2="33" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+    <line x1="61" y1="35" x2="47" y2="34" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+    <!-- Cola con curva elegante -->
+    <path d="M58 56 Q78 44 72 28 Q70 22 65 26" stroke="#00D4FF" stroke-width="2.2" fill="none" stroke-linecap="round" id="catTail"/>
+    <!-- Pata delantera izquierda -->
+    <ellipse cx="28" cy="67" rx="7" ry="5" fill="#1a2a4a" stroke="#00D4FF" stroke-width="1.2"/>
+    <!-- Pata delantera derecha -->
+    <ellipse cx="52" cy="67" rx="7" ry="5" fill="#1a2a4a" stroke="#00D4FF" stroke-width="1.2"/>
+    <!-- Dedos de la pata izquierda (tres círculos pequeños) -->
+    <circle cx="25" cy="68" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <circle cx="28" cy="70" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <circle cx="31" cy="68" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <!-- Dedos de la pata derecha -->
+    <circle cx="49" cy="68" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <circle cx="52" cy="70" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <circle cx="55" cy="68" r="1.5" fill="#00D4FF" opacity=".4"/>
+    <!-- Antena tech: línea + punto parpadeante en la cabeza -->
+    <line x1="40" y1="14" x2="40" y2="5" stroke="#00D4FF" stroke-width="1.2"/>
+    <circle cx="40" cy="4" r="2.5" fill="#00D4FF">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Corazoncito decorativo en el pecho del gato -->
+    <text x="37" y="56" font-size="9" fill="#ff6b9d" opacity=".8">♥</text>
+  </svg>
+</div>
+
+<!-- ================================================
+     BOTÓN FLOTANTE DE WHATSAPP
+     Botón circular verde animado en la esquina inferior derecha.
+     Al hover muestra tooltip "¡Escríbenos!".
+     Abre WhatsApp con mensaje predefinido al hacer clic.
+     ================================================ -->
+<a id="whatsapp-btn"
+   href="https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios."
+   target="_blank" rel="noopener noreferrer"
+   title="Contáctanos por WhatsApp">
+  <!-- Ícono oficial de WhatsApp en SVG (path oficial) -->
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ================================================
+     JAVASCRIPT — LÓGICA PRINCIPAL DEL SITIO
+     Incluye:
+     - Sistema SPA (abrir/cerrar secciones overlay)
+     - Inyección del logo en base64
+     - Canvas de partículas
+     - Generador de circuitos neón SVG
+     - Navbar scroll
+     - Reveal al scroll (IntersectionObserver)
+     - Contadores animados
+     - Tilt 3D del formulario de contacto
+     - Líneas activas en campos de formulario
+     - Íconos magnéticos en servicios
+     - Gatito mascota (mensajes, ojos, parpadeo)
+     ================================================ -->
+<script>
+
+/* ================================================
+   SISTEMA SPA — NAVEGACIÓN POR OVERLAY
+   ================================================
+   openSpa(name)  → activa el overlay con id "spa-{name}",
+                    bloquea el scroll del body y marca el
+                    link del navbar como activo (.active).
+   closeSpa(name) → desactiva el overlay y restaura el scroll.
+   Tecla Escape   → cierra cualquier SPA abierta.
+   ================================================ */
+
+/**
+ * Abre la sección SPA indicada por nombre.
+ * @param {string} name - nombre de la sección (inicio|servicios|blog|contenido|contacto)
+ */
+function openSpa(name) {
+  // Cerrar cualquier SPA que esté abierta primero
+  document.querySelectorAll('.spa-page.active').forEach(p => p.classList.remove('active'));
+
+  // Activar la SPA solicitada
+  const page = document.getElementById('spa-' + name);
+  if (page) {
+    page.classList.add('active');
+    page.scrollTop = 0;  // Scroll al tope al abrir
+  }
+
+  // Bloquear el scroll de la página principal mientras la SPA está abierta
+  document.body.style.overflow = 'hidden';
+
+  // Marcar el link activo en el navbar
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.spa === name);
+  });
+}
+
+/**
+ * Cierra la sección SPA indicada por nombre.
+ * @param {string} name - nombre de la sección a cerrar
+ */
+function closeSpa(name) {
+  const page = document.getElementById('spa-' + name);
+  if (page) page.classList.remove('active');
+
+  // Restaurar el scroll del body
+  document.body.style.overflow = '';
+
+  // Quitar clase activa de todos los links del navbar
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+}
+
+// Cerrar la SPA activa al presionar la tecla Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.spa-page.active').forEach(p => {
+      p.classList.remove('active');
+    });
+    document.body.style.overflow = '';
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  }
+});
+
+/* ================================================
+   LOGO EN BASE64
+   Si se proporciona el logo real en base64, se
+   asigna automáticamente al hero y al navbar.
+   ================================================ */
+const LOGO_B64 = 'LOGO_BASE64_DATA';  // Reemplazar con el base64 del logo real
+const logoSrc = 'data:image/png;base64,' + LOGO_B64;
+// Solo asigna si se ha reemplazado el placeholder por datos reales
+if (LOGO_B64 !== 'LOGO_BASE64_DATA') {
+  document.getElementById('logoImg').src = logoSrc;
+  document.getElementById('navLogoImg').src = logoSrc;
+}
+
+/* ================================================
+   CANVAS DE PARTÍCULAS — FONDO ANIMADO
+   Dibuja puntos azules neón conectados por líneas
+   que se mueven lentamente por la pantalla.
+   También genera destellos de rayo aleatorios.
+   ================================================ */
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, parts = [];
+
+// Ajusta el tamaño del canvas al redimensionar la ventana
+function resizeC() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+window.addEventListener('resize', resizeC);
+
+// Crea 55 partículas con posición, velocidad, radio y opacidad aleatorios
+function initP() {
+  resizeC(); parts = [];
+  for (let i = 0; i < 55; i++) {
+    parts.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - .5) * .4,
+      vy: (Math.random() - .5) * .4,
+      r: Math.random() * 1.5 + .5,
+      a: Math.random() * .5 + .2
+    });
+  }
+}
+
+// Bucle de animación: dibuja líneas entre partículas cercanas y actualiza posiciones
+function drawP() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Dibujar líneas entre partículas que estén a menos de 110px de distancia
+  const pc = window._particleColor || 'rgba(0,212,255,';
+  for (let i = 0; i < parts.length; i++) {
+    for (let j = i + 1; j < parts.length; j++) {
+      const dx = parts[i].x - parts[j].x, dy = parts[i].y - parts[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        ctx.beginPath();
+        ctx.strokeStyle = pc + (.08 * (1 - d / 110)) + ')';
+        ctx.lineWidth = .5;
+        ctx.moveTo(parts[i].x, parts[i].y);
+        ctx.lineTo(parts[j].x, parts[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Dibujar y mover cada partícula
+  parts.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = pc + p.a + ')';
+    ctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    // Rebotar en los bordes del canvas
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
+  });
+
+  // Generar ocasionalmente un destello de rayo entre dos partículas cercanas
+  if (Math.random() < .025) {
+    const a = parts[Math.floor(Math.random() * parts.length)];
+    const b = parts[Math.floor(Math.random() * parts.length)];
+    if (Math.hypot(a.x - b.x, a.y - b.y) < 180) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0,212,255,0.35)';
+      ctx.lineWidth = .8;
+      ctx.moveTo(a.x, a.y);
+      // Rayo zigzag con 5 segmentos desviados aleatoriamente
+      for (let s = 1; s < 5; s++) {
+        ctx.lineTo(
+          a.x + (b.x - a.x) * s / 5 + (Math.random() - .5) * 22,
+          a.y + (b.y - a.y) * s / 5 + (Math.random() - .5) * 22
+        );
+      }
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+  }
+
+  requestAnimationFrame(drawP);  // Llamar al siguiente frame
+}
+initP(); drawP();
+
+/* ================================================
+   CIRCUITOS NEÓN AZUL — SVGs ANIMADOS
+   Genera 55 "rollos" de circuito SVG con posiciones,
+   delays y duraciones aleatorias. Cinco formas distintas:
+   espiral, L, U, zigzag, y cruz con terminales.
+   ================================================ */
+(function generateNeonCircuits() {
+  const container = document.getElementById('neonCircuits');
+  const colors = ['#00D4FF', '#0af', '#00ffff', '#4af7ff'];  // Variaciones de azul neón
+
+  function makeRoll() {
+    const div = document.createElement('div');
+    div.className = 'nc-roll';
+
+    // Posición aleatoria dentro del viewport
+    div.style.left = Math.random() * 95 + 'vw';
+    div.style.top  = Math.random() * 90 + 'vh';
+
+    // Delay y duración individuales para evitar sincronía visual
+    const delay = Math.random() * 12;
+    const dur   = 4 + Math.random() * 6;
+    div.style.animationDelay    = delay + 's';
+    div.style.animationDuration = dur + 's';
+
+    const type  = Math.floor(Math.random() * 5);           // Tipo de forma (0–4)
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size  = 18 + Math.random() * 30;                 // Tamaño entre 18–48px
+    const sw    = 1.2 + Math.random() * 0.8;              // Grosor de línea
+
+    let svgPath = '';
+
+    if (type === 0) {
+      // Espiral doble (rollo de cable compacto)
+      svgPath = `<path d="M${size/2},${size/2} m-${size*.35},0 a${size*.35},${size*.35} 0 1,1 ${size*.7},0 a${size*.25},${size*.25} 0 1,0 -${size*.5},0" stroke="${color}" stroke-width="${sw}" fill="none" opacity=".75"/>`;
+    } else if (type === 1) {
+      // Forma en L con nodos en los extremos
+      svgPath = `<polyline points="4,${size-4} 4,4 ${size-4},4" stroke="${color}" stroke-width="${sw}" fill="none" opacity=".8"/>
+                 <circle cx="${size-4}" cy="4" r="2.5" fill="${color}" opacity=".9"/>
+                 <circle cx="4" cy="${size-4}" r="2" fill="${color}" opacity=".7"/>`;
+    } else if (type === 2) {
+      // Forma en U con terminales cuadradas
+      svgPath = `<path d="M4,4 L4,${size-6} Q4,${size} 8,${size} L${size-8},${size} Q${size-4},${size} ${size-4},${size-6} L${size-4},4" stroke="${color}" stroke-width="${sw}" fill="none" opacity=".75"/>
+                 <rect x="2" y="2" width="4" height="4" fill="${color}" opacity=".9"/>
+                 <rect x="${size-6}" y="2" width="4" height="4" fill="${color}" opacity=".9"/>`;
+    } else if (type === 3) {
+      // Zigzag con 4 puntos (traza de circuito impreso)
+      svgPath = `<polyline points="2,${size/2} ${size*.2},4 ${size*.5},${size-4} ${size*.8},4 ${size-2},${size/2}" stroke="${color}" stroke-width="${sw}" fill="none" opacity=".7"/>`;
+    } else {
+      // Cruz (+) con círculos en los 4 extremos y centro
+      svgPath = `<line x1="${size/2}" y1="2" x2="${size/2}" y2="${size-2}" stroke="${color}" stroke-width="${sw}" opacity=".8"/>
+                 <line x1="2" y1="${size/2}" x2="${size-2}" y2="${size/2}" stroke="${color}" stroke-width="${sw}" opacity=".8"/>
+                 <circle cx="${size/2}" cy="2" r="2" fill="${color}" opacity=".9"/>
+                 <circle cx="${size/2}" cy="${size-2}" r="2" fill="${color}" opacity=".9"/>
+                 <circle cx="2" cy="${size/2}" r="2" fill="${color}" opacity=".9"/>
+                 <circle cx="${size-2}" cy="${size/2}" r="2" fill="${color}" opacity=".9"/>
+                 <circle cx="${size/2}" cy="${size/2}" r="3" fill="${color}" opacity=".5"/>`;
+    }
+
+    // Agregar el SVG con filtro de brillo al contenedor
+    div.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="filter:drop-shadow(0 0 4px ${color})">${svgPath}</svg>`;
+    container.appendChild(div);
+  }
+
+  // Crear 55 rollos distribuidos aleatoriamente
+  for (let i = 0; i < 55; i++) makeRoll();
+})();
+
+/* ================================================
+   NAVBAR — EFECTO AL HACER SCROLL
+   Agrega la clase .scrolled al navbar cuando el
+   usuario ha scrolleado más de 60px, activando el
+   fondo semi-transparente con blur.
+   ================================================ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', scrollY > 60);
+});
+
+/* ================================================
+   REVEAL AL SCROLL — IntersectionObserver
+   Los elementos con clase .reveal se hacen visibles
+   (opacity: 1, translateY: 0) cuando entran en el
+   viewport, con un umbral del 10%.
+   ================================================ */
+const revEls = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: .1 });
+revEls.forEach(r => ro.observe(r));
+
+/* ================================================
+   CONTADORES ANIMADOS
+   Se animan de 0 al valor target cuando el elemento
+   entra en el viewport (umbral: 50%).
+   ================================================ */
+const cnums = document.querySelectorAll('.counter-num');
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const tgt = parseInt(e.target.dataset.target);
+      let cur = 0;
+      const step = Math.ceil(tgt / 55);  // Incremento por tick para ~55 pasos
+      const t = setInterval(() => {
+        cur = Math.min(cur + step, tgt);
+        e.target.textContent = cur + '+';
+        if (cur >= tgt) clearInterval(t);
+      }, 28);
+      co.unobserve(e.target);  // Solo animar una vez
+    }
+  });
+}, { threshold: .5 });
+cnums.forEach(n => co.observe(n));
+
+/* ================================================
+   TILT 3D DEL FORMULARIO DE CONTACTO
+   Al mover el mouse sobre el formulario, se aplica
+   una rotación perspectiva sutil (máx. 5°) que
+   da sensación de profundidad 3D.
+   ================================================ */
+const fc = document.getElementById('contactForm');
+if (fc) {
+  fc.addEventListener('mousemove', e => {
+    const r = fc.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top)  / r.height - .5;
+    fc.style.transform = `perspective(1000px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+  });
+  fc.addEventListener('mouseleave', () => fc.style.transform = '');
+}
+
+/* ================================================
+   LÍNEAS ACTIVAS EN CAMPOS DEL FORMULARIO
+   Cuando un campo recibe el foco, su línea inferior
+   neón se expande al 100% de ancho.
+   Al perder el foco sin valor, se contrae a 0.
+   ================================================ */
+document.querySelectorAll('.form-field input, .form-field textarea').forEach(el => {
+  const line = el.parentElement.querySelector('.field-line');
+  if (line) {
+    el.addEventListener('focus',  () => line.style.width = '100%');
+    el.addEventListener('blur',   () => { if (!el.value) line.style.width = '0'; });
+  }
+});
+
+/* ================================================
+   ENVÍO DEL FORMULARIO — PÁGINA PRINCIPAL
+   Valida que los tres campos estén llenos.
+   Si faltan, aplica la animación de sacudida (.shake).
+   ================================================ */
+function handleSubmit() {
+  const n = document.getElementById('fname').value;
+  const e = document.getElementById('femail').value;
+  const m = document.getElementById('fmessage').value;
+  if (!n || !e || !m) {
+    // Sacudir el formulario si está incompleto
+    fc.classList.remove('shake');
+    void fc.offsetWidth;  // Reinicia la animación forzando reflow
+    fc.classList.add('shake');
+    return;
+  }
+  alert('¡Mensaje enviado! Te contactaremos pronto. 🚀');
+}
+
+/* ================================================
+   ENVÍO DEL FORMULARIO — SPA CONTACTO
+   Misma lógica pero referenciando los campos del SPA.
+   ================================================ */
+function handleSpaSubmit() {
+  const n = document.getElementById('spa-fname').value;
+  const e = document.getElementById('spa-femail').value;
+  const m = document.getElementById('spa-fmessage').value;
+  const spaForm = document.getElementById('spaContactForm');
+  if (!n || !e || !m) {
+    spaForm.classList.remove('shake');
+    void spaForm.offsetWidth;
+    spaForm.classList.add('shake');
+    return;
+  }
+  alert('¡Mensaje enviado! Te contactaremos pronto. 🚀');
+}
+
+/* ================================================
+   ÍCONOS MAGNÉTICOS EN TARJETAS DE SERVICIO
+   Al mover el mouse cerca del ícono (radio < 100px),
+   el ícono se desplaza levemente hacia el cursor
+   creando un efecto magnético sutil.
+   ================================================ */
+document.querySelectorAll('.svc-icon').forEach(icon => {
+  const card = icon.closest('.service-card');
+  card.addEventListener('mousemove', e => {
+    const r = icon.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const dx = e.clientX - cx, dy = e.clientY - cy;
+    const d = Math.hypot(dx, dy);
+    if (d < 100) {
+      const f = (100 - d) / 100;  // Factor de atracción (0–1)
+      icon.style.transform = `translate(${dx * f * .35}px, ${dy * f * .35}px)`;
+    }
+  });
+  card.addEventListener('mouseleave', () => icon.style.transform = '');
+});
+
+/* ================================================
+   TILT 3D DE ITEMS DE GALERÍA
+   Similar al tilt del formulario pero con mayor
+   amplitud (máx. 16°) para un efecto más dramático.
+   ================================================ */
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('mousemove', e => {
+    const r = item.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top)  / r.height - .5;
+    item.style.transform = `perspective(600px) rotateX(${-y * 16}deg) rotateY(${x * 16}deg) scale(1.04)`;
+  });
+  item.addEventListener('mouseleave', () => item.style.transform = '');
+});
+
+/* ================================================
+   GATITO MASCOTA — SISTEMA DE MENSAJES Y ANIMACIÓN
+   ================================================ */
+
+// Referencias a elementos del gatito en el DOM
+const catBubble     = document.getElementById('catBubble');
+const catBubbleText = document.getElementById('catBubbleText');
+const catSvg        = document.getElementById('cat-svg');
+const catEyeL       = document.getElementById('catEyeL');
+const catEyeR       = document.getElementById('catEyeR');
+
+// Banco de mensajes que el gatito muestra aleatoriamente
+const catMsgs = [
+  '¡Miau! ¿En qué puedo ayudarte? 🐱',
+  'Tecnología andina desde 3600m 🏔',
+  '¡Eduvel.AI al poder! ⚡',
+  'Tu éxito digital comienza aquí ✨',
+  '¿Probamos algo con IA hoy? 🤖',
+  'La Paz + Tecnología = 🚀',
+  '¡Psst! Escríbenos por WhatsApp 💬',
+  'Miau... estoy vigilando el código 🔍',
+  '¡Bolivia tech para el mundo! 🌎',
+  '¿Listo para automatizar tu negocio? ⚙️'
+];
+let catMsgIdx = 0;  // Índice del próximo mensaje a mostrar
+let catTimer;       // Timer para ocultar la burbuja después de X segundos
+
+/**
+ * Muestra un mensaje en la nubecita del gatito.
+ * @param {string} txt - Texto a mostrar
+ * @param {number} duration - Duración en ms antes de ocultar (default 3500)
+ */
+function showCatBubble(txt, duration = 3500) {
+  catBubbleText.textContent = txt;
+  catBubble.classList.add('visible');
+  clearTimeout(catTimer);
+  catTimer = setTimeout(() => catBubble.classList.remove('visible'), duration);
+}
+
+/**
+ * Maneja el click en el gatito: rebote visual + mostrar mensaje.
+ */
+function catClick() {
+  // Animación de rebote al hacer clic
+  catSvg.style.transform = 'scale(1.2) rotate(-8deg)';
+  setTimeout(() => catSvg.style.removeProperty('transform'), 350);
+  // Mostrar el siguiente mensaje del banco
+  showCatBubble(catMsgs[catMsgIdx++ % catMsgs.length]);
+}
+
+/**
+ * Bucle recursivo de mensajes automáticos cada 8–15 segundos.
+ * El gatito "habla" espontáneamente para captar la atención.
+ */
+function autoCatMessage() {
+  const delay = 8000 + Math.random() * 7000;  // 8 a 15 segundos
+  setTimeout(() => {
+    showCatBubble(catMsgs[catMsgIdx++ % catMsgs.length]);
+    autoCatMessage();  // Repetir indefinidamente
+  }, delay);
+}
+
+/**
+ * Animación de parpadeo de los ojos del gatito.
+ * Los ojos se cierran (ry → 0.4) y se abren (ry → 3.5) cada 2.5–6 segundos.
+ */
+function catBlink() {
+  if (catEyeL) {
+    catEyeL.setAttribute('ry', '0.4');  // Cerrar ojo izquierdo
+    catEyeR.setAttribute('ry', '0.4');  // Cerrar ojo derecho
+    setTimeout(() => {
+      catEyeL.setAttribute('ry', '3.5');  // Abrir ojo izquierdo
+      catEyeR.setAttribute('ry', '3.5');  // Abrir ojo derecho
+    }, 120);
+  }
+  // Programar el próximo parpadeo con intervalo aleatorio
+  setTimeout(catBlink, 2500 + Math.random() * 3500);
+}
+
+/**
+ * Mueve las pupilas del gatito para que "sigan" al cursor del mouse.
+ * Se llama desde el evento mousemove del documento.
+ * @param {number} x - Posición X del cursor
+ * @param {number} y - Posición Y del cursor
+ */
+function moveCatEyes(x, y) {
+  const r = catSvg.getBoundingClientRect();
+  if (!r.width) return;
+  // Calcular ángulo entre el centro del gato y el cursor
+  const ang = Math.atan2(y - (r.top + r.height / 2), x - (r.left + r.width / 2));
+  const d = 1.8;  // Radio máximo de desplazamiento de la pupila
+  const ex = Math.cos(ang) * d;
+  const ey = Math.sin(ang) * d;
+  // Desplazar las pupilas en la dirección calculada
+  if (catEyeL) {
+    catEyeL.setAttribute('cx', 32 + ex);
+    catEyeL.setAttribute('cy', 28 + ey);
+  }
+  if (catEyeR) {
+    catEyeR.setAttribute('cx', 48 + ex);
+    catEyeR.setAttribute('cy', 28 + ey);
+  }
+}
+
+// Mover los ojos del gatito con el cursor (mousemove en documento)
+document.addEventListener('mousemove', e => {
+  moveCatEyes(e.clientX, e.clientY);
+});
+
+/**
+ * Abre WhatsApp con el número y mensaje predefinidos.
+ * Llamado desde el botón pequeño debajo del gatito.
+ */
+function openWhatsApp() {
+  window.open(
+    'https://wa.me/59173284201?text=Hola%20Eduvel.AI%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios.',
+    '_blank'
+  );
+}
+
+/* ================================================
+   ANIMACIÓN SENCILLA: ORBES FLOTANTES
+   Círculos suaves que flotan y pulsan en el fondo.
+   ================================================ */
+(function() {
+  const orbs = [];
+  const NUM = 8;
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  const colors = isDark ? ['rgba(0,212,255,', 'rgba(212,175,55,', 'rgba(76,175,80,'] : ['rgba(0,136,187,', 'rgba(184,149,42,', 'rgba(76,175,80,'];
+
+  for (let i = 0; i < NUM; i++) {
+    const el = document.createElement('div');
+    const size = 60 + Math.random() * 120;
+    const color = colors[i % colors.length];
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const dur = 8 + Math.random() * 12;
+    const delay = Math.random() * -10;
+
+    el.style.cssText = `
+      position: fixed;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      left: ${x}vw;
+      top: ${y}vh;
+      background: radial-gradient(circle, ${color}0.06) 0%, ${color}0) 70%);
+      border: 1px solid ${color}0.12);
+      pointer-events: none;
+      z-index: 1;
+      animation: orbFloat ${dur}s ${delay}s ease-in-out infinite alternate;
+    `;
+    document.body.appendChild(el);
+    orbs.push(el);
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes orbFloat {
+      0%   { transform: translate(0, 0) scale(1);   opacity: 0.4; }
+      50%  { transform: translate(${20}px, ${-30}px) scale(1.08); opacity: 0.7; }
+      100% { transform: translate(${-15}px, ${20}px) scale(0.94); opacity: 0.3; }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+
+/* ================================================
+   SISTEMA DE TEMA OSCURO / CLARO
+   ================================================ */
+
+/**
+ * Alterna entre modo oscuro y modo claro.
+ * Guarda la preferencia en localStorage.
+ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('eduvel-theme', newTheme);
+
+  // Animación del botón
+  const btn = document.getElementById('themeToggle');
+  btn.style.transform = 'scale(0.85) rotate(180deg)';
+  setTimeout(() => {
+    btn.style.transform = '';
+  }, 350);
+
+  // Actualizar el canvas de partículas con color del tema
+  updateParticleColor(newTheme);
+}
+
+/** Actualiza el color de las partículas según el tema */
+function updateParticleColor(theme) {
+  window._particleColor = theme === 'dark'
+    ? 'rgba(0,212,255,'
+    : 'rgba(0,136,187,';
+  window._particleOpacity = theme === 'dark' ? 0.45 : 0.2;
+  if (canvas) canvas.style.opacity = window._particleOpacity;
+}
+
+// Init color on load
+updateParticleColor(document.documentElement.getAttribute('data-theme') || 'dark');
+
+/* ================================================
+   MENÚ HAMBURGUESA MÓVIL
+   ================================================ */
+
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn   = document.getElementById('navHamburger');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    btn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn   = document.getElementById('navHamburger');
+  menu.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close mobile menu on ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMobileMenu();
+});
+
+/* ================================================
+   ENHANCED SCROLL PROGRESS INDICATOR
+   ================================================ */
+(function() {
+  const bar = document.createElement('div');
+  bar.style.cssText = `
+    position: fixed; top: 0; left: 0; z-index: 9999;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--electric), var(--gold), var(--electric));
+    background-size: 200%;
+    transition: width .1s linear;
+    pointer-events: none;
+  `;
+  document.body.appendChild(bar);
+
+  let animFrame;
+  window.addEventListener('scroll', () => {
+    cancelAnimationFrame(animFrame);
+    animFrame = requestAnimationFrame(() => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    });
+  });
+})();
+
+/* ================================================
+   ENHANCED PARTICLE COLOR — patch drawP
+   ================================================ */
+// Override particle draw to use theme color
+const _origDrawP = window.drawP;
+
+</script>
+</body>
+</html>
